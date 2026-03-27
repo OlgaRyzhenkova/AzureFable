@@ -6,17 +6,13 @@ using System.Threading.Tasks;
 
 namespace AzureFable.Models
 {
-    internal class Enemy : Unit
+    internal abstract class Enemy : Unit
     {
         public Enums.AIBehaviour Behaviour { get; set; }
-
-        public Enemy()
+        protected Enemy()
         {
-            Name = "Enemy";
             MaxHealth = 1;
             Health = 1;
-            ImagePath = "Assets/Enemy.png";
-            Behaviour = Enums.AIBehaviour.Standing;
         }
     }
 }
