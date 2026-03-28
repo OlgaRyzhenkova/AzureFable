@@ -1,6 +1,5 @@
 ﻿using AzureFable.ViewModels;
 using System.Windows;
-using System.Windows.Controls;
 
 namespace AzureFable
 {
@@ -11,16 +10,24 @@ namespace AzureFable
         public MainWindow()
         {
             InitializeComponent();
-            _mainViewModel = new MainViewModel(ShowView);
-            ShowView(_mainViewModel.CurrentView);
+            try
+            {
+                _mainViewModel = new MainViewModel(ShowView);
+                ShowView(_mainViewModel.CurrentView);
+            }
+            catch (System.Exception ex)
+            {
+                MessageBox.Show(ex.Message + "\n\n" + ex.StackTrace, "Помилка");
+            }
         }
 
         private void ShowView(ViewModelBase viewModel)
         {
-            if (viewModel is MenuViewModel)
+            if (viewModel is MenuViewModel menuViewModel)
             {
-                MainContent.Content = new Views.MenuView();
-                MainContent.Content = new Frame();
+                var view = new Views.MenuView();
+                view.DataContext = menuViewModel;
+                MainContent.Content = view;
             }
             else if (viewModel is GameViewModel gameViewModel)
             {
