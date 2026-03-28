@@ -22,9 +22,11 @@ namespace AzureFable
                 MainContent.Content = new Views.MenuView();
                 MainContent.Content = new Frame();
             }
-            else if (viewModel is GameViewModel)
+            else if (viewModel is GameViewModel gameViewModel)
             {
-                //MainContent.Content = new Views.GameView();
+                var view = new Views.GameView();
+                view.SetViewModel(gameViewModel);
+                MainContent.Content = view;
             }
         }
     }

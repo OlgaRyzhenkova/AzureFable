@@ -1,27 +1,27 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using AzureFable.ViewModels;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace AzureFable.Views
 {
-    /// <summary>
-    /// Interaction logic for GameView.xaml
-    /// </summary>
     public partial class GameView : Window
     {
+        private GameViewModel? _viewModel;
+
         public GameView()
         {
             InitializeComponent();
+        }
+
+        internal void SetViewModel(GameViewModel viewModel)
+        {
+            _viewModel = viewModel;
+            DataContext = _viewModel;
+        }
+
+        private void Window_KeyDown(object sender, KeyEventArgs e)
+        {
+            _viewModel?.MoveHero(e.Key);
         }
     }
 }

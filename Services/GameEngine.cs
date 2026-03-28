@@ -38,7 +38,7 @@ namespace AzureFable.Services
             _timer.Stop();
         }
 
-        private void OnTick(object sender, EventArgs e)
+        private void OnTick(object? sender, EventArgs e)
         {
             _enemyLogic.MoveGhosts(_maze.Ghosts, _maze);
 
