@@ -19,7 +19,7 @@ namespace AzureFable
         {
             if (viewModel is MenuViewModel)
             {
-                //MainContent.Content = new Views.MenuView();
+                MainContent.Content = new Views.MenuView();
                 MainContent.Content = new Frame();
             }
             else if (viewModel is GameViewModel)

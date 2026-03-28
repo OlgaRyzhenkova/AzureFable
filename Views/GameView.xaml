@@ -1,0 +1,100 @@
+﻿<Window x:Class="AzureFable.Views.GameView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Azure Fable"
+        Height="600"
+        Width="1000"
+        KeyDown="Window_KeyDown">
+
+    <Grid Background="#0a0a2e">
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="60"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!-- HUD -->
+        <StackPanel Grid.Row="0"
+                    Orientation="Horizontal"
+                    VerticalAlignment="Center"
+                    Margin="20,0,0,0">
+
+            <TextBlock Text="Здоров'я: "
+                       Foreground="White"
+                       FontSize="18"
+                       VerticalAlignment="Center"/>
+
+            <ItemsControl ItemsSource="{Binding Hearts}">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <StackPanel Orientation="Horizontal"/>
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <Image Source="/Images/heart.png"
+                               Width="30"
+                               Height="30"
+                               Margin="2,0"/>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+
+            <Image Source="/Images/key.png"
+                   Width="30"
+                   Height="30"
+                   Margin="20,0,5,0"
+                   Visibility="{Binding HasKey, Converter={StaticResource BoolToVisibilityConverter}}"/>
+
+            <TextBlock Text="Ключ знайдено!"
+                       Foreground="#f5c842"
+                       FontSize="16"
+                       VerticalAlignment="Center"
+                       Visibility="{Binding HasKey, Converter={StaticResource BoolToVisibilityConverter}}"/>
+
+        </StackPanel>
+
+        <!-- Canvas лабіринту -->
+        <Canvas x:Name="GameCanvas"
+                Grid.Row="1">
+
+            <!-- Клітинки -->
+            <ItemsControl ItemsSource="{Binding Cells}">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <Canvas/>
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <Image Source="{Binding ImagePath}"
+                               Width="40"
+                               Height="40"
+                               Canvas.Left="{Binding X, Converter={StaticResource CellSizeConverter}}"
+                               Canvas.Top="{Binding Y, Converter={StaticResource CellSizeConverter}}"/>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+
+            <!-- Ігрові об'єкти -->
+            <ItemsControl ItemsSource="{Binding GameObjects}">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <Canvas/>
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <Image Source="{Binding ImagePath}"
+                               Width="40"
+                               Height="40"
+                               Canvas.Left="{Binding X, Converter={StaticResource CellSizeConverter}}"
+                               Canvas.Top="{Binding Y, Converter={StaticResource CellSizeConverter}}"/>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+
+        </Canvas>
+
+    </Grid>
+</Window>
