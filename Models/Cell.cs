@@ -11,6 +11,7 @@ namespace AzureFable.Models
         public int X { get; set; }
         public int Y { get; set; }
         public Item? Item { get; set; }
+        public string ImagePath { get; set; } = string.Empty;
 
         protected Cell(int x, int y)
         {

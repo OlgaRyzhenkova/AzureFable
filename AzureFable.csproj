@@ -9,9 +9,32 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Assets\BrokenHeart.png" />
+    <None Remove="Assets\Enemy.png" />
+    <None Remove="Assets\Floor.png" />
+    <None Remove="Assets\Ghost.png" />
+    <None Remove="Assets\Heart.png" />
+    <None Remove="Assets\Hero.png" />
+    <None Remove="Assets\Key.png" />
+    <None Remove="Assets\Portal.png" />
+    <None Remove="Assets\Wall.png" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Folder Include="ViewModels\" />
     <Folder Include="Services\" />
-    <Folder Include="Assets\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Assets\BrokenHeart.png" />
+    <Resource Include="Assets\Enemy.png" />
+    <Resource Include="Assets\Floor.png" />
+    <Resource Include="Assets\Ghost.png" />
+    <Resource Include="Assets\Heart.png" />
+    <Resource Include="Assets\Hero.png" />
+    <Resource Include="Assets\Key.png" />
+    <Resource Include="Assets\Portal.png" />
+    <Resource Include="Assets\Wall.png" />
   </ItemGroup>
 
 </Project>

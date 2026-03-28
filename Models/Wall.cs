@@ -10,7 +10,7 @@ namespace AzureFable.Models
     {
         public Wall(int x, int y) : base(x, y)
         {
-
+            ImagePath = "Images/Wall.png";
         }
 
         public override bool IsPassable()
