@@ -15,7 +15,7 @@ namespace AzureFable
             KeyDown += MainWindow_KeyDown;
             try
             {
-                _mainViewModel = new MainViewModel(ShowView);
+                _mainViewModel = new MainViewModel(ShowView, ShowGameOverScreen);
                 ShowView(_mainViewModel.CurrentView);
             }
             catch (System.Exception ex)
@@ -44,6 +44,16 @@ namespace AzureFable
                 _gameView.SetViewModel(gameViewModel);
                 MainContent.Content = _gameView;
             }
+        }
+
+        private void ShowGameOverScreen(bool isWin)
+        {
+            _gameView = null;
+            MainContent.Content = new Views.GameOverView(
+                isWin,
+                () => _mainViewModel.StartGame(),
+                () => _mainViewModel.ShowMenu()
+            );
         }
     }
 }

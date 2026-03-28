@@ -11,6 +11,8 @@ namespace AzureFable.ViewModels
         private readonly MazeGenerator _mazeGenerator;
         private readonly CollisionService _collisionService;
         private readonly GameEngine _gameEngine;
+        private readonly Action _onWin;
+        private readonly Action _onGameOver;
 
         private Enums.GameState _gameState;
         public Enums.GameState GameState
@@ -50,8 +52,10 @@ namespace AzureFable.ViewModels
         public ObservableCollection<GameObject> GameObjects { get; set; }
         public ObservableCollection<bool> Hearts { get; set; }
 
-        public GameViewModel()
+        public GameViewModel(Action onWin, Action onGameOver)
         {
+            _onWin = onWin;
+            _onGameOver = onGameOver;
             _mazeGenerator = new MazeGenerator();
             _collisionService = new CollisionService();
             GameObjects = new ObservableCollection<GameObject>();
@@ -75,18 +79,12 @@ namespace AzureFable.ViewModels
             if (state == Enums.GameState.Win)
             {
                 _gameEngine.Stop();
-                MessageBox.Show(
-                    "Вітаємо! Ви пройшли лабіринт!",
-                    "Перемога!",
-                    MessageBoxButton.OK);
+                _onWin();
             }
             else if (state == Enums.GameState.GameOver)
             {
                 _gameEngine.Stop();
-                MessageBox.Show(
-                    "Ви загинули! Спробуйте ще раз.",
-                    "Кінець гри",
-                    MessageBoxButton.OK);
+                _onGameOver();
             }
         }
 

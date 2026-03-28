@@ -1,0 +1,46 @@
+﻿<UserControl x:Class="AzureFable.Views.GameOverView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <Grid Background="#0a0a2e">
+
+        <StackPanel VerticalAlignment="Center"
+                    HorizontalAlignment="Center">
+
+            <TextBlock x:Name="TitleText"
+                       FontSize="52"
+                       FontWeight="Bold"
+                       HorizontalAlignment="Center"
+                       Margin="0,0,0,20"/>
+
+            <TextBlock x:Name="SubtitleText"
+                       FontSize="22"
+                       Foreground="#a0c4e8"
+                       HorizontalAlignment="Center"
+                       Margin="0,0,0,60"/>
+
+            <Button Content="Грати знову"
+                    x:Name="PlayAgainButton"
+                    Width="200"
+                    Height="50"
+                    FontSize="18"
+                    Margin="0,0,0,20"
+                    Background="#1a1a4e"
+                    Foreground="White"
+                    BorderBrush="#5bc8f5"
+                    Click="PlayAgainButton_Click"/>
+
+            <Button Content="Головне меню"
+                    x:Name="MenuButton"
+                    Width="200"
+                    Height="50"
+                    FontSize="18"
+                    Background="#1a1a4e"
+                    Foreground="White"
+                    BorderBrush="#5bc8f5"
+                    Click="MenuButton_Click"/>
+
+        </StackPanel>
+
+    </Grid>
+</UserControl>
