@@ -1,10 +1,10 @@
 ﻿using AzureFable.ViewModels;
-using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Input;
 
 namespace AzureFable.Views
 {
-    public partial class GameView : Window
+    public partial class GameView : UserControl
     {
         private GameViewModel? _viewModel;
 
@@ -19,7 +19,7 @@ namespace AzureFable.Views
             DataContext = _viewModel;
         }
 
-        private void Window_KeyDown(object sender, KeyEventArgs e)
+        private void UserControl_KeyDown(object sender, KeyEventArgs e)
         {
             _viewModel?.MoveHero(e.Key);
         }

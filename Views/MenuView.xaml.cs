@@ -2,7 +2,7 @@
 
 namespace AzureFable.Views
 {
-    public partial class MenuView : Window
+    public partial class MenuView : UserControl
     {
         public MenuView()
         {
