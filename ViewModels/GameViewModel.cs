@@ -1,11 +1,7 @@
 ﻿using AzureFable.Models;
 using AzureFable.Services;
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Windows;
 
 namespace AzureFable.ViewModels
 {
@@ -24,6 +20,7 @@ namespace AzureFable.ViewModels
             {
                 _gameState = value;
                 OnPropertyChanged();
+                OnGameStateChanged(value);
             }
         }
 
@@ -48,6 +45,7 @@ namespace AzureFable.ViewModels
                 OnPropertyChanged();
             }
         }
+
         public ObservableCollection<Cell> Cells { get; set; }
         public ObservableCollection<GameObject> GameObjects { get; set; }
         public ObservableCollection<bool> Hearts { get; set; }
@@ -65,10 +63,31 @@ namespace AzureFable.ViewModels
 
             HeroHealth = _maze.Hero.Health;
             HasKey = _maze.Hero.HasKey;
-            GameState = Enums.GameState.Playing;
+            _gameState = Enums.GameState.Playing;
 
+            UpdateGameState();
             UpdateGame();
             _gameEngine.Start();
+        }
+
+        private void OnGameStateChanged(Enums.GameState state)
+        {
+            if (state == Enums.GameState.Win)
+            {
+                _gameEngine.Stop();
+                MessageBox.Show(
+                    "Вітаємо! Ви пройшли лабіринт!",
+                    "Перемога!",
+                    MessageBoxButton.OK);
+            }
+            else if (state == Enums.GameState.GameOver)
+            {
+                _gameEngine.Stop();
+                MessageBox.Show(
+                    "Ви загинули! Спробуйте ще раз.",
+                    "Кінець гри",
+                    MessageBoxButton.OK);
+            }
         }
 
         public void MoveHero(System.Windows.Input.Key key)
@@ -113,8 +132,8 @@ namespace AzureFable.ViewModels
 
                 if (cell.Item is Portal && _maze.Hero.HasKey)
                 {
+                    cell.Item = null;
                     GameState = Enums.GameState.Win;
-                    _gameEngine.Stop();
                     return;
                 }
 
@@ -173,16 +192,15 @@ namespace AzureFable.ViewModels
             HeroHealth = _maze.Hero.Health;
             HasKey = _maze.Hero.HasKey;
 
-            if (_maze.Hero.Health <= 0)
-            {
-                GameState = Enums.GameState.GameOver;
-                _gameEngine.Stop();
-            }
-
             Hearts.Clear();
             for (int i = 0; i < _maze.Hero.Health; i++)
             {
                 Hearts.Add(true);
+            }
+
+            if (_maze.Hero.Health <= 0)
+            {
+                GameState = Enums.GameState.GameOver;
             }
         }
 
