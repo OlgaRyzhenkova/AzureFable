@@ -128,20 +128,24 @@ namespace AzureFable.ViewModels
 
             if (cell.Item != null && cell.Item.IsActive)
             {
-                cell.Item.Interact(_maze.Hero);
-
-                if (cell.Item is Portal && _maze.Hero.HasKey)
+                if (cell.Item is Portal)
                 {
-                    cell.Item = null;
-                    GameState = Enums.GameState.Win;
-                    return;
+                    if (_maze.Hero.HasKey)
+                    {
+                        GameState = Enums.GameState.Win;
+                    }
+                    return; 
                 }
 
                 if (cell.Item is Key)
                 {
+                    cell.Item.Interact(_maze.Hero);
                     SpawnPortal();
+                    cell.Item = null;
+                    return;
                 }
 
+                cell.Item.Interact(_maze.Hero);
                 cell.Item = null;
             }
         }
