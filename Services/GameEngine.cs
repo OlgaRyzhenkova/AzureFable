@@ -24,7 +24,7 @@ namespace AzureFable.Services
             _collisionService = new CollisionService();
 
             _timer = new DispatcherTimer();
-            _timer.Interval = TimeSpan.FromMilliseconds(200);
+            _timer.Interval = TimeSpan.FromMilliseconds(500);
             _timer.Tick += OnTick;
         }
 

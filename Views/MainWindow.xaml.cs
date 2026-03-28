@@ -1,15 +1,18 @@
 ﻿using AzureFable.ViewModels;
 using System.Windows;
+using System.Windows.Input;
 
 namespace AzureFable
 {
     public partial class MainWindow : Window
     {
         private readonly MainViewModel _mainViewModel;
+        private Views.GameView? _gameView;
 
         public MainWindow()
         {
             InitializeComponent();
+            KeyDown += MainWindow_KeyDown;
             try
             {
                 _mainViewModel = new MainViewModel(ShowView);
@@ -21,6 +24,11 @@ namespace AzureFable
             }
         }
 
+        private void MainWindow_KeyDown(object sender, KeyEventArgs e)
+        {
+            _gameView?.ViewModel?.MoveHero(e.Key);
+        }
+
         private void ShowView(ViewModelBase viewModel)
         {
             if (viewModel is MenuViewModel menuViewModel)
@@ -28,12 +36,13 @@ namespace AzureFable
                 var view = new Views.MenuView();
                 view.DataContext = menuViewModel;
                 MainContent.Content = view;
+                _gameView = null;
             }
             else if (viewModel is GameViewModel gameViewModel)
             {
-                var view = new Views.GameView();
-                view.SetViewModel(gameViewModel);
-                MainContent.Content = view;
+                _gameView = new Views.GameView();
+                _gameView.SetViewModel(gameViewModel);
+                MainContent.Content = _gameView;
             }
         }
     }

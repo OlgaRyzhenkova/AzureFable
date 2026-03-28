@@ -6,7 +6,7 @@ namespace AzureFable.Views
 {
     public partial class GameView : UserControl
     {
-        private GameViewModel? _viewModel;
+        internal GameViewModel? ViewModel { get; private set; }
 
         public GameView()
         {
@@ -15,15 +15,13 @@ namespace AzureFable.Views
 
         internal void SetViewModel(GameViewModel viewModel)
         {
-            _viewModel = viewModel;
-            DataContext = _viewModel;
-            Focusable = true;
-            Focus();
+            ViewModel = viewModel;
+            DataContext = viewModel;
         }
 
         private void UserControl_KeyDown(object sender, KeyEventArgs e)
         {
-            _viewModel?.MoveHero(e.Key);
+            ViewModel?.MoveHero(e.Key);
         }
     }
 }
