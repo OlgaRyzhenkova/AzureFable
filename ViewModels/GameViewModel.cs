@@ -120,6 +120,22 @@ namespace AzureFable.ViewModels
             CheckEnemyInteraction();
             UpdateGameState();
             UpdateGame();
+
+            _maze.Hero.Move(dx, dy);
+
+            CheckItemInteraction();
+            CheckEnemyInteraction();
+            UpdateGameState();
+            UpdateGame();
+
+            if (_gameState == Enums.GameState.Win)
+            {
+                OnGameStateChanged(Enums.GameState.Win);
+            }
+            else if (_gameState == Enums.GameState.GameOver)
+            {
+                OnGameStateChanged(Enums.GameState.GameOver);
+            }
         }
 
         private void CheckItemInteraction()
@@ -132,9 +148,10 @@ namespace AzureFable.ViewModels
                 {
                     if (_maze.Hero.HasKey)
                     {
-                        GameState = Enums.GameState.Win;
+                        _gameState = Enums.GameState.Win; 
+                        OnPropertyChanged(nameof(GameState));
                     }
-                    return; 
+                    return;
                 }
 
                 if (cell.Item is Key)
