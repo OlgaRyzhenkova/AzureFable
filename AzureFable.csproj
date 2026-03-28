@@ -21,10 +21,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="ViewModels\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <Resource Include="Assets\BrokenHeart.png" />
     <Resource Include="Assets\Enemy.png" />
     <Resource Include="Assets\Floor.png" />
