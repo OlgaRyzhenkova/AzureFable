@@ -50,6 +50,7 @@ namespace AzureFable.ViewModels
         }
         public ObservableCollection<Cell> Cells { get; set; }
         public ObservableCollection<GameObject> GameObjects { get; set; }
+        public ObservableCollection<bool> Hearts { get; set; }
 
         public GameViewModel()
         {
@@ -57,6 +58,7 @@ namespace AzureFable.ViewModels
             _collisionService = new CollisionService();
             GameObjects = new ObservableCollection<GameObject>();
             Cells = new ObservableCollection<Cell>();
+            Hearts = new ObservableCollection<bool>();
 
             _maze = _mazeGenerator.Generate();
             _gameEngine = new GameEngine(_maze, UpdateGame);
@@ -175,6 +177,12 @@ namespace AzureFable.ViewModels
             {
                 GameState = Enums.GameState.GameOver;
                 _gameEngine.Stop();
+            }
+
+            Hearts.Clear();
+            for (int i = 0; i < _maze.Hero.Health; i++)
+            {
+                Hearts.Add(true);
             }
         }
 
