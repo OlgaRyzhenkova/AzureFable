@@ -17,6 +17,8 @@ namespace AzureFable.Views
         {
             _viewModel = viewModel;
             DataContext = _viewModel;
+            Focusable = true;
+            Focus();
         }
 
         private void UserControl_KeyDown(object sender, KeyEventArgs e)
