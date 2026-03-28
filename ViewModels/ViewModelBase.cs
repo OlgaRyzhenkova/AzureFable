@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace AzureFable.ViewModels
 {
-    internal class ViewModelBase
+    internal abstract class ViewModelBase : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler? PropertyChanged;
 
