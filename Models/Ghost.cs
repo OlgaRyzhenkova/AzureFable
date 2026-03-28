@@ -11,7 +11,7 @@ namespace AzureFable.Models
         public Ghost()
         {
             Name = "Ghost";
-            ImagePath = "Assets/Ghost.png";
+            ImagePath = "/Assets/Ghost.png";
             Behaviour = Enums.AIBehaviour.Random;
         }
         public void Flee(int dx, int dy)

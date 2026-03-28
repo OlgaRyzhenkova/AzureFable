@@ -11,7 +11,7 @@ namespace AzureFable.Models
         public Portal()
         {
             Name = "Portal";
-            ImagePath = "Assets/Portal.png";
+            ImagePath = "/Assets/Portal.png";
         }
 
         public override void Interact(Hero hero)

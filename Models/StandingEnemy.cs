@@ -11,7 +11,7 @@ namespace AzureFable.Models
         public StandingEnemy()
         {
             Name = "StandingEnemy";
-            ImagePath = "Assets/Enemy.png";
+            ImagePath = "/Assets/Enemy.png";
             Behaviour = Enums.AIBehaviour.Standing;
         }
     }

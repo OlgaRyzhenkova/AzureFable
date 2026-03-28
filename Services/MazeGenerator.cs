@@ -116,11 +116,11 @@ namespace AzureFable.Services
             for (int i = 0; i < count; i++)
             {
                 Floor cell = GetRandomFreeCell(freeCells);
-                Heart heart = new Heart();
-                heart.X = cell.X;
-                heart.Y = cell.Y;
-                cell.Item = heart;
-                maze.Items.Add(heart);
+                Heart Heart = new Heart();
+                Heart.X = cell.X;
+                Heart.Y = cell.Y;
+                cell.Item = Heart;
+                maze.Items.Add(Heart);
             }
         }
     }

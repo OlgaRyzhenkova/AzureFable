@@ -80,11 +80,11 @@ namespace AzureFable.Services
 
             int index = _random.Next(freeCells.Count);
             Floor cell = freeCells[index];
-            Heart heart = new Heart();
-            heart.X = cell.X;
-            heart.Y = cell.Y;
-            cell.Item = heart;
-            maze.Items.Add(heart);
+            Heart Heart = new Heart();
+            Heart.X = cell.X;
+            Heart.Y = cell.Y;
+            cell.Item = Heart;
+            maze.Items.Add(Heart);
         }
     }
 }

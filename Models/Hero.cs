@@ -15,7 +15,7 @@ namespace AzureFable.Models
             Name = "Hero";
             MaxHealth = 3;
             Health = 3;
-            ImagePath = "Assets/Hero.png";
+            ImagePath = "/Assets/Hero.png";
         }
 
         public void Move(int dx, int dy)

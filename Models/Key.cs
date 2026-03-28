@@ -11,7 +11,7 @@ namespace AzureFable.Models
         public Key()
         {
             Name = "Key";
-            ImagePath = "Assets/Key.png";
+            ImagePath = "/Assets/Key.png";
         }
         public override void Interact(Hero hero)
         {

@@ -1,7 +1,7 @@
 ﻿<UserControl x:Class="AzureFable.Views.GameView"
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        KeyDown="UserControl_KeyDown">
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             KeyDown="UserControl_KeyDown">
 
     <Grid Background="#0a0a2e">
 
@@ -29,7 +29,7 @@
                 </ItemsControl.ItemsPanel>
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
-                        <Image Source="/Images/heart.png"
+                        <Image Source="/Assets/Heart.png"
                                Width="30"
                                Height="30"
                                Margin="2,0"/>
@@ -37,7 +37,7 @@
                 </ItemsControl.ItemTemplate>
             </ItemsControl>
 
-            <Image Source="/Images/key.png"
+            <Image Source="/Assets/Key.png"
                    Width="30"
                    Height="30"
                    Margin="20,0,5,0"
@@ -50,10 +50,10 @@
                        Visibility="{Binding HasKey, Converter={StaticResource BoolToVisibilityConverter}}"/>
 
         </StackPanel>
+        
 
         <!-- Canvas лабіринту -->
-        <Canvas x:Name="GameCanvas"
-                Grid.Row="1">
+        <Grid Grid.Row="1">
 
             <!-- Клітинки -->
             <ItemsControl ItemsSource="{Binding Cells}">
@@ -62,13 +62,17 @@
                         <Canvas/>
                     </ItemsPanelTemplate>
                 </ItemsControl.ItemsPanel>
+                <ItemsControl.ItemContainerStyle>
+                    <Style TargetType="ContentPresenter">
+                        <Setter Property="Canvas.Left" Value="{Binding X, Converter={StaticResource CellSizeConverter}}"/>
+                        <Setter Property="Canvas.Top" Value="{Binding Y, Converter={StaticResource CellSizeConverter}}"/>
+                    </Style>
+                </ItemsControl.ItemContainerStyle>
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
                         <Image Source="{Binding ImagePath}"
-                               Width="40"
-                               Height="40"
-                               Canvas.Left="{Binding X, Converter={StaticResource CellSizeConverter}}"
-                               Canvas.Top="{Binding Y, Converter={StaticResource CellSizeConverter}}"/>
+                       Width="40"
+                       Height="40"/>
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>
             </ItemsControl>
@@ -80,18 +84,29 @@
                         <Canvas/>
                     </ItemsPanelTemplate>
                 </ItemsControl.ItemsPanel>
+                <ItemsControl.ItemContainerStyle>
+                    <Style TargetType="ContentPresenter">
+                        <Setter Property="Canvas.Left" Value="{Binding X, Converter={StaticResource CellSizeConverter}}"/>
+                        <Setter Property="Canvas.Top" Value="{Binding Y, Converter={StaticResource CellSizeConverter}}"/>
+                    </Style>
+                </ItemsControl.ItemContainerStyle>
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
                         <Image Source="{Binding ImagePath}"
-                               Width="40"
-                               Height="40"
-                               Canvas.Left="{Binding X, Converter={StaticResource CellSizeConverter}}"
-                               Canvas.Top="{Binding Y, Converter={StaticResource CellSizeConverter}}"/>
+                       Width="40"
+                       Height="40"/>
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>
             </ItemsControl>
 
-        </Canvas>
+            <Image Grid.Row="1" 
+       Source="/Assets/Floor.png" 
+       Width="40" 
+       Height="40"
+       VerticalAlignment="Top"
+       HorizontalAlignment="Left"/>
+
+        </Grid>
 
     </Grid>
 </UserControl>
