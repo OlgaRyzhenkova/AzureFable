@@ -167,28 +167,33 @@ namespace AzureFable.ViewModels
 
         private void SpawnPortal()
         {
-            Floor? portalCell = null;
+            List<Floor> freeCells = new List<Floor>();
 
             for (int y = 0; y < _maze.Rows; y++)
             {
                 for (int x = 0; x < _maze.Columns; x++)
                 {
-                    if (_maze.Grid[y, x] is Floor floor && floor.Item == null
-                        && !(_maze.Hero.X == x && _maze.Hero.Y == y))
+                    if (_maze.Grid[y, x] is Floor floor
+                && floor.Item == null
+                && !(_maze.Hero.X == x && _maze.Hero.Y == y)
+                && !(_maze.Enemies.Exists(e => e.X == x && e.Y == y))
+                && !(_maze.Ghosts.Exists(g => g.X == x && g.Y == y)))
                     {
-                        portalCell = floor;
+                        freeCells.Add(floor);
                     }
                 }
             }
 
-            if (portalCell != null)
-            {
+            if (freeCells.Count == 0) return;
+
+            Random random = new Random();
+            Floor portalCell = freeCells[random.Next(freeCells.Count)];
+            
                 Portal portal = new Portal();
                 portal.X = portalCell.X;
                 portal.Y = portalCell.Y;
                 portalCell.Item = portal;
                 _maze.Items.Add(portal);
-            }
         }
 
         private void CheckEnemyInteraction()
