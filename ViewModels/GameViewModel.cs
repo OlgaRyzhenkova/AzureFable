@@ -119,13 +119,6 @@ namespace AzureFable.ViewModels
             UpdateGameState();
             UpdateGame();
 
-            _maze.Hero.Move(dx, dy);
-
-            CheckItemInteraction();
-            CheckEnemyInteraction();
-            UpdateGameState();
-            UpdateGame();
-
             if (_gameState == Enums.GameState.Win)
             {
                 OnGameStateChanged(Enums.GameState.Win);
