@@ -5,7 +5,8 @@
         Height="600"
         Width="1000"
         WindowStartupLocation="CenterScreen"
-        ResizeMode="NoResize">
+        ResizeMode="NoResize"
+        Background="{StaticResource BackgroundBrush}">
 
     <Grid>
         <ContentControl x:Name="MainContent"/>

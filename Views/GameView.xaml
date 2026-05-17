@@ -4,102 +4,129 @@
              KeyDown="UserControl_KeyDown"
              Focusable="True">
 
-    <Grid Background="#0a0a2e">
+    <Grid Background="{StaticResource BackgroundBrush}">
 
         <Grid.RowDefinitions>
-            <RowDefinition Height="60"/>
+            <RowDefinition Height="72"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <!-- HUD -->
-        <StackPanel Grid.Row="0"
-                    Orientation="Horizontal"
-                    VerticalAlignment="Center"
-                    Margin="20,0,0,0">
+        <Grid Grid.Row="0"
+              Margin="28,12">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
 
-            <TextBlock Text="Здоров'я: "
-                       Foreground="White"
-                       FontSize="18"
-                       VerticalAlignment="Center"/>
+            <Border Grid.Column="0"
+                    Style="{StaticResource HudPanelStyle}"
+                    HorizontalAlignment="Left">
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="Здоров'я"
+                               Style="{StaticResource HudTextStyle}"
+                               Margin="0,0,12,0"/>
 
-            <ItemsControl ItemsSource="{Binding Hearts}">
-                <ItemsControl.ItemsPanel>
-                    <ItemsPanelTemplate>
-                        <StackPanel Orientation="Horizontal"/>
-                    </ItemsPanelTemplate>
-                </ItemsControl.ItemsPanel>
-                <ItemsControl.ItemTemplate>
-                    <DataTemplate>
-                        <Image Source="/Assets/Heart.png"
-                               Width="30"
-                               Height="30"
-                               Margin="2,0"/>
-                    </DataTemplate>
-                </ItemsControl.ItemTemplate>
-            </ItemsControl>
+                    <ItemsControl ItemsSource="{Binding Hearts}">
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <StackPanel Orientation="Horizontal"/>
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <Image Source="/Assets/Heart.png"
+                                       Width="28"
+                                       Height="28"
+                                       Margin="2,0"/>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                </StackPanel>
+            </Border>
 
-            <Image Source="/Assets/Key.png"
-                   Width="30"
-                   Height="30"
-                   Margin="20,0,5,0"
-                   Visibility="{Binding HasKey, Converter={StaticResource BoolToVisibilityConverter}}"/>
+            <Border Grid.Column="1"
+                    Style="{StaticResource HudPanelStyle}">
+                <StackPanel Orientation="Horizontal">
+                    <Image Source="/Assets/Key.png"
+                           Width="28"
+                           Height="28"
+                           Margin="0,0,8,0"/>
 
-            <TextBlock Text="Ключ знайдено!"
-                       Foreground="#f5c842"
-                       FontSize="16"
-                       VerticalAlignment="Center"
-                       Visibility="{Binding HasKey, Converter={StaticResource BoolToVisibilityConverter}}"/>
-
-        </StackPanel>
-
-        <!-- Лабіринт -->
-        <Grid Grid.Row="1">
-
-            <!-- Клітинки -->
-            <ItemsControl ItemsSource="{Binding Cells}">
-                <ItemsControl.ItemsPanel>
-                    <ItemsPanelTemplate>
-                        <Canvas/>
-                    </ItemsPanelTemplate>
-                </ItemsControl.ItemsPanel>
-                <ItemsControl.ItemContainerStyle>
-                    <Style TargetType="ContentPresenter">
-                        <Setter Property="Canvas.Left" Value="{Binding X, Converter={StaticResource CellSizeConverter}}"/>
-                        <Setter Property="Canvas.Top" Value="{Binding Y, Converter={StaticResource CellSizeConverter}}"/>
-                    </Style>
-                </ItemsControl.ItemContainerStyle>
-                <ItemsControl.ItemTemplate>
-                    <DataTemplate>
-                        <Image Source="{Binding ImagePath}"
-                               Width="40"
-                               Height="40"/>
-                    </DataTemplate>
-                </ItemsControl.ItemTemplate>
-            </ItemsControl>
-
-            <!-- Ігрові об'єкти — герої, монстри, привиди -->
-            <ItemsControl ItemsSource="{Binding GameObjects}">
-                <ItemsControl.ItemsPanel>
-                    <ItemsPanelTemplate>
-                        <Canvas/>
-                    </ItemsPanelTemplate>
-                </ItemsControl.ItemsPanel>
-                <ItemsControl.ItemContainerStyle>
-                    <Style TargetType="ContentPresenter">
-                        <Setter Property="Canvas.Left" Value="{Binding X, Converter={StaticResource CellSizeConverter}}"/>
-                        <Setter Property="Canvas.Top" Value="{Binding Y, Converter={StaticResource CellSizeConverter}}"/>
-                    </Style>
-                </ItemsControl.ItemContainerStyle>
-                <ItemsControl.ItemTemplate>
-                    <DataTemplate>
-                        <Image Source="{Binding ImagePath}"
-                               Width="40"
-                               Height="40"/>
-                    </DataTemplate>
-                </ItemsControl.ItemTemplate>
-            </ItemsControl>
-
+                    <TextBlock Text="Ключ знайдено"
+                               Style="{StaticResource HudTextStyle}"
+                               Foreground="{StaticResource AccentGoldBrush}"
+                               Visibility="{Binding HasKey, Converter={StaticResource BoolToVisibilityConverter}}"/>
+                </StackPanel>
+            </Border>
         </Grid>
+
+        <Border Grid.Row="1"
+                Width="928"
+                Height="528"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                Background="{StaticResource SurfaceBrush}"
+                BorderBrush="{StaticResource AccentBrush}"
+                BorderThickness="2"
+                CornerRadius="6"
+                Padding="2">
+
+            <Grid Width="920"
+                  Height="520"
+                  ClipToBounds="True">
+
+                <ItemsControl ItemsSource="{Binding Cells}"
+                              Width="920"
+                              Height="520">
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <Canvas/>
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                    <ItemsControl.ItemContainerStyle>
+                        <Style TargetType="ContentPresenter">
+                            <Setter Property="Canvas.Left" Value="{Binding X, Converter={StaticResource CellSizeConverter}}"/>
+                            <Setter Property="Canvas.Top" Value="{Binding Y, Converter={StaticResource CellSizeConverter}}"/>
+                        </Style>
+                    </ItemsControl.ItemContainerStyle>
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <Border BorderBrush="#15193F"
+                                    BorderThickness="0.5"
+                                    Width="40"
+                                    Height="40">
+                                <Image Source="{Binding ImagePath}"
+                                       Stretch="Fill"/>
+                            </Border>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+
+                <ItemsControl ItemsSource="{Binding GameObjects}"
+                              Width="920"
+                              Height="520">
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <Canvas/>
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                    <ItemsControl.ItemContainerStyle>
+                        <Style TargetType="ContentPresenter">
+                            <Setter Property="Canvas.Left" Value="{Binding X, Converter={StaticResource CellSizeConverter}}"/>
+                            <Setter Property="Canvas.Top" Value="{Binding Y, Converter={StaticResource CellSizeConverter}}"/>
+                        </Style>
+                    </ItemsControl.ItemContainerStyle>
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <Image Source="{Binding ImagePath}"
+                                   Width="40"
+                                   Height="40"/>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </Grid>
+        </Border>
+
 
     </Grid>
 </UserControl>
