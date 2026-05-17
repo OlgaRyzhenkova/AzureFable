@@ -31,6 +31,8 @@ namespace AzureFable
 
         private void ShowView(ViewModelBase viewModel)
         {
+            HideOverlay();
+
             if (viewModel is MenuViewModel menuViewModel)
             {
                 var view = new Views.MenuView();
@@ -48,6 +50,7 @@ namespace AzureFable
 
         private void ShowGameOverScreen(bool isWin)
         {
+            HideOverlay();
             _gameView = null;
             MainContent.Content = new Views.GameOverView(
                 isWin,
@@ -58,12 +61,28 @@ namespace AzureFable
 
         private void ShowPauseScreen()
         {
-            _gameView = null;
-            MainContent.Content = new Views.PauseView(
-                () => _mainViewModel.ResumeGame(),
-                () => _mainViewModel.StartGame(),
-                () => _mainViewModel.ShowMenu()
+            OverlayContent.Content = new Views.PauseView(
+                () =>
+                {
+                    HideOverlay();
+                    _mainViewModel.ResumeGame();
+                },
+                () =>
+                {
+                    HideOverlay();
+                    _mainViewModel.StartGame();
+                },
+                () =>
+                {
+                    HideOverlay();
+                    _mainViewModel.ShowMenu();
+                }
             );
+        }
+
+        private void HideOverlay()
+        {
+            OverlayContent.Content = null;
         }
     }
 }

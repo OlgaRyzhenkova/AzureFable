@@ -10,5 +10,7 @@
 
     <Grid>
         <ContentControl x:Name="MainContent"/>
+        <ContentControl x:Name="OverlayContent"
+                        Panel.ZIndex="10"/>
     </Grid>
 </Window>

@@ -62,9 +62,9 @@
             </Border>
 
             <Button Grid.Column="2"
-                    Content="Пауза"
+                    Content="⏸ ПАУЗА"
                     Command="{Binding PauseCommand}"
-                    Style="{StaticResource PrimaryButtonStyle}"
+                    Style="{StaticResource CrystalHudButtonStyle}"
                     Width="120"
                     Height="46"/>
         </Grid>

@@ -50,7 +50,6 @@ namespace AzureFable.ViewModels
             }
 
             _gameViewModel.Resume();
-            CurrentView = _gameViewModel;
         }
 
         public void ShowMenu()

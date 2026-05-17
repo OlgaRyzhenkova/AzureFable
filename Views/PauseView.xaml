@@ -2,35 +2,123 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
-    <Grid Background="{StaticResource BackgroundBrush}">
-        <StackPanel VerticalAlignment="Center"
-                    HorizontalAlignment="Center"
-                    Width="420">
+    <UserControl.Resources>
+        <Style x:Key="PauseButtonStyle" TargetType="Button">
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Foreground" Value="#BAE8FF"/>
+            <Setter Property="FontFamily" Value="Constantia"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border x:Name="ButtonBorder"
+                                Background="#E6051121"
+                                BorderBrush="#7700D2FF"
+                                BorderThickness="1.2"
+                                CornerRadius="4">
+                            <Border.Effect>
+                                <DropShadowEffect Color="#00D2FF"
+                                                  BlurRadius="5"
+                                                  ShadowDepth="0"
+                                                  Opacity="0.28"/>
+                            </Border.Effect>
+                            <StackPanel Orientation="Horizontal"
+                                        HorizontalAlignment="Center"
+                                        VerticalAlignment="Center">
+                                <TextBlock Text="{TemplateBinding Tag}"
+                                           Foreground="#00D2FF"
+                                           FontSize="18"
+                                           Margin="0,0,10,0"
+                                           VerticalAlignment="Center"/>
+                                <ContentPresenter VerticalAlignment="Center"/>
+                            </StackPanel>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="ButtonBorder" Property="Background" Value="#E60A2A45"/>
+                                <Setter TargetName="ButtonBorder" Property="BorderBrush" Value="#00FFFF"/>
+                                <Setter Property="Foreground" Value="White"/>
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter TargetName="ButtonBorder" Property="Opacity" Value="0.7"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </UserControl.Resources>
 
-            <TextBlock Text="Пауза"
-                       Style="{StaticResource ScreenTitleStyle}"
-                       FontSize="52"
-                       Margin="0,0,0,14"/>
+    <Grid Background="#99000000"
+          TextOptions.TextFormattingMode="Display"
+          TextOptions.TextRenderingMode="ClearType">
+        <Border Width="380"
+                Height="334"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                Background="#F0051121"
+                BorderBrush="#AA00D2FF"
+                BorderThickness="1.5"
+                CornerRadius="8">
+            <Border.Effect>
+                <DropShadowEffect Color="#00D2FF"
+                                  BlurRadius="18"
+                                  ShadowDepth="0"
+                                  Opacity="0.42"/>
+            </Border.Effect>
 
-            <TextBlock Text="Гра призупинена"
-                       Style="{StaticResource ScreenSubtitleStyle}"
-                       TextAlignment="Center"
-                       Margin="0,0,0,54"/>
+            <StackPanel VerticalAlignment="Center"
+                        HorizontalAlignment="Center"
+                        Margin="24,28">
 
-            <Button Content="Продовжити"
-                    Style="{StaticResource PrimaryButtonStyle}"
-                    Margin="0,0,0,18"
-                    Click="ResumeButton_Click"/>
+                <TextBlock Text="— ПАУЗА —"
+                           Foreground="#E0F7FF"
+                           FontFamily="Constantia"
+                           FontSize="32"
+                           FontWeight="Bold"
+                           HorizontalAlignment="Center"
+                           Margin="0,0,0,6">
+                    <TextBlock.Effect>
+                        <DropShadowEffect Color="#00CCFF"
+                                          BlurRadius="5"
+                                          ShadowDepth="0"
+                                          Opacity="0.55"/>
+                    </TextBlock.Effect>
+                </TextBlock>
 
-            <Button Content="Почати заново"
-                    Style="{StaticResource PrimaryButtonStyle}"
-                    Margin="0,0,0,18"
-                    Click="RestartButton_Click"/>
+                <Rectangle Height="1"
+                           Width="300"
+                           Fill="#5500D2FF"
+                           Margin="0,4,0,20"/>
 
-            <Button Content="Головне меню"
-                    Style="{StaticResource PrimaryButtonStyle}"
-                    Click="MenuButton_Click"/>
+                <Button Content="Продовжити"
+                        Tag="▶"
+                        Style="{StaticResource PauseButtonStyle}"
+                        Width="300"
+                        Height="56"
+                        FontSize="18"
+                        Margin="0,0,0,8"
+                        IsDefault="True"
+                        Click="ResumeButton_Click"/>
 
-        </StackPanel>
+                <Button Content="Рестарт"
+                        Tag="↺"
+                        Style="{StaticResource PauseButtonStyle}"
+                        Width="300"
+                        Height="48"
+                        FontSize="16"
+                        Margin="0,0,0,8"
+                        Click="RestartButton_Click"/>
+
+                <Button Content="Головне меню"
+                        Tag="⌂"
+                        Style="{StaticResource PauseButtonStyle}"
+                        Width="300"
+                        Height="48"
+                        FontSize="16"
+                        Click="MenuButton_Click"/>
+
+            </StackPanel>
+        </Border>
     </Grid>
 </UserControl>
