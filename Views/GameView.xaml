@@ -16,6 +16,7 @@
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
 
             <Border Grid.Column="0"
@@ -45,7 +46,8 @@
             </Border>
 
             <Border Grid.Column="1"
-                    Style="{StaticResource HudPanelStyle}">
+                    Style="{StaticResource HudPanelStyle}"
+                    Margin="0,0,12,0">
                 <StackPanel Orientation="Horizontal">
                     <Image Source="/Assets/Key.png"
                            Width="28"
@@ -58,6 +60,13 @@
                                Visibility="{Binding HasKey, Converter={StaticResource BoolToVisibilityConverter}}"/>
                 </StackPanel>
             </Border>
+
+            <Button Grid.Column="2"
+                    Content="Пауза"
+                    Command="{Binding PauseCommand}"
+                    Style="{StaticResource PrimaryButtonStyle}"
+                    Width="120"
+                    Height="46"/>
         </Grid>
 
         <Border Grid.Row="1"

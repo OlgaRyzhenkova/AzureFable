@@ -43,6 +43,28 @@ namespace AzureFable.Services
             _timer.Stop();
         }
 
+        public void Pause()
+        {
+            if (GameState != Enums.GameState.Playing)
+            {
+                return;
+            }
+
+            GameState = Enums.GameState.Paused;
+            Stop();
+        }
+
+        public void Resume()
+        {
+            if (GameState != Enums.GameState.Paused)
+            {
+                return;
+            }
+
+            GameState = Enums.GameState.Playing;
+            Start();
+        }
+
         private void OnTick(object? sender, EventArgs e)
         {
             if (GameState != Enums.GameState.Playing)

@@ -11,6 +11,7 @@ namespace AzureFable.ViewModels
         private readonly GameEngine _gameEngine;
         private readonly Action _onWin;
         private readonly Action _onGameOver;
+        private readonly Action _onPause;
 
         private Enums.GameState _gameState;
         public Enums.GameState GameState
@@ -54,15 +55,18 @@ namespace AzureFable.ViewModels
         public ObservableCollection<Cell> Cells { get; }
         public ObservableCollection<GameObject> GameObjects { get; }
         public ObservableCollection<bool> Hearts { get; }
+        public RelayCommand PauseCommand { get; }
 
-        public GameViewModel(Action onWin, Action onGameOver)
+        public GameViewModel(Action onWin, Action onGameOver, Action onPause)
         {
             _onWin = onWin;
             _onGameOver = onGameOver;
+            _onPause = onPause;
             _mazeGenerator = new MazeGenerator();
             GameObjects = new ObservableCollection<GameObject>();
             Cells = new ObservableCollection<Cell>();
             Hearts = new ObservableCollection<bool>();
+            PauseCommand = new RelayCommand(Pause);
 
             _maze = _mazeGenerator.Generate();
             _gameEngine = new GameEngine(_maze, RefreshGame);
@@ -96,6 +100,12 @@ namespace AzureFable.ViewModels
                 return;
             }
 
+            if (key == System.Windows.Input.Key.Escape)
+            {
+                Pause();
+                return;
+            }
+
             int dx = 0;
             int dy = 0;
 
@@ -106,6 +116,29 @@ namespace AzureFable.ViewModels
             else return;
 
             _gameEngine.MoveHero(dx, dy);
+        }
+
+        public void Pause()
+        {
+            if (GameState != Enums.GameState.Playing)
+            {
+                return;
+            }
+
+            _gameEngine.Pause();
+            UpdateGameState();
+            _onPause();
+        }
+
+        public void Resume()
+        {
+            if (GameState != Enums.GameState.Paused)
+            {
+                return;
+            }
+
+            _gameEngine.Resume();
+            UpdateGameState();
         }
 
         private void RefreshGame()
