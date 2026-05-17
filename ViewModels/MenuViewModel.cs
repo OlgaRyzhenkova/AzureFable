@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Windows;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -15,11 +14,13 @@ namespace AzureFable.ViewModels
 
         private readonly Action _onStartGame;
         private readonly Action _onShowHelp;
+        private readonly Action _onConfirmExit;
 
-        public MenuViewModel(Action onStartGame, Action onShowHelp)
+        public MenuViewModel(Action onStartGame, Action onShowHelp, Action onConfirmExit)
         {
             _onStartGame = onStartGame;
             _onShowHelp = onShowHelp;
+            _onConfirmExit = onConfirmExit;
             StartGameCommand = new RelayCommand(StartGame);
             HelpCommand = new RelayCommand(ShowHelp);
             ExitCommand = new RelayCommand(Exit);
@@ -37,7 +38,7 @@ namespace AzureFable.ViewModels
 
         private void Exit()
         {
-            Application.Current.Shutdown();
+            _onConfirmExit();
         }
     }
 }

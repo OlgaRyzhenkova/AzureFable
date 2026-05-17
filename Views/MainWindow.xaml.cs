@@ -15,7 +15,7 @@ namespace AzureFable
             KeyDown += MainWindow_KeyDown;
             try
             {
-                _mainViewModel = new MainViewModel(ShowView, ShowGameOverScreen, ShowPauseScreen, ShowGameHelpScreen);
+                _mainViewModel = new MainViewModel(ShowView, ShowGameOverScreen, ShowPauseScreen, ShowGameHelpScreen, ShowExitConfirmation);
                 ShowView(_mainViewModel.CurrentView);
             }
             catch (System.Exception ex)
@@ -96,6 +96,15 @@ namespace AzureFable
                 _mainViewModel.ResumeGame();
             });
             OverlayContent.Content = view;
+        }
+
+        private void ShowExitConfirmation()
+        {
+            OverlayContent.Content = new Views.ConfirmView(
+                "Ви дійсно хочете вийти з гри?",
+                () => Application.Current.Shutdown(),
+                HideOverlay
+            );
         }
 
         private void HideOverlay()
