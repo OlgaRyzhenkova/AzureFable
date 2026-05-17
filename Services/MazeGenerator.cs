@@ -42,12 +42,12 @@ namespace AzureFable.Services
                 {
                     if (Layout[y][x] == '#')
                     {
-                        maze.Grid[y, x] = new Wall(x, y);
+                        maze.SetCell(new Wall(x, y));
                     }
                     else
                     {
                         Floor floor = new Floor(x, y);
-                        maze.Grid[y, x] = floor;
+                        maze.SetCell(floor);
                         freeCells.Add(floor);
                     }
                 }
@@ -73,18 +73,15 @@ namespace AzureFable.Services
         private void PlaceHero(Maze maze, List<Floor> freeCells)
         {
             Floor cell = GetRandomFreeCell(freeCells);
-            maze.Hero.X = cell.X;
-            maze.Hero.Y = cell.Y;
+            maze.Hero.SetPosition(cell.X, cell.Y);
         }
 
         private void PlaceKey(Maze maze, List<Floor> freeCells)
         {
             Floor cell = GetRandomFreeCell(freeCells);
             Key key = new Key();
-            key.X = cell.X;
-            key.Y = cell.Y;
-            cell.Item = key;
-            maze.Items.Add(key);
+            cell.PlaceItem(key);
+            maze.AddItem(key);
         }
 
         private void PlaceEnemies(Maze maze, List<Floor> freeCells, int count)
@@ -93,9 +90,8 @@ namespace AzureFable.Services
             {
                 Floor cell = GetRandomFreeCell(freeCells);
                 StandingEnemy enemy = new StandingEnemy();
-                enemy.X = cell.X;
-                enemy.Y = cell.Y;
-                maze.Enemies.Add(enemy);
+                enemy.SetPosition(cell.X, cell.Y);
+                maze.AddEnemy(enemy);
             }
         }
 
@@ -105,9 +101,8 @@ namespace AzureFable.Services
             {
                 Floor cell = GetRandomFreeCell(freeCells);
                 Ghost ghost = new Ghost();
-                ghost.X = cell.X;
-                ghost.Y = cell.Y;
-                maze.Ghosts.Add(ghost);
+                ghost.SetPosition(cell.X, cell.Y);
+                maze.AddGhost(ghost);
             }
         }
 
@@ -116,11 +111,9 @@ namespace AzureFable.Services
             for (int i = 0; i < count; i++)
             {
                 Floor cell = GetRandomFreeCell(freeCells);
-                Heart Heart = new Heart();
-                Heart.X = cell.X;
-                Heart.Y = cell.Y;
-                cell.Item = Heart;
-                maze.Items.Add(Heart);
+                Heart heart = new Heart();
+                cell.PlaceItem(heart);
+                maze.AddItem(heart);
             }
         }
     }

@@ -15,8 +15,8 @@ namespace AzureFable.Models
         }
         public override void Interact(Hero hero)
         {
-            hero.HasKey = true;
-            IsActive = false;
+            hero.CollectKey();
+            Deactivate();
         }
     }
 }

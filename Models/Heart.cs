@@ -17,7 +17,7 @@ namespace AzureFable.Models
         public override void Interact(Hero hero)
         {
             hero.Heal(1);
-            IsActive = false;
+            Deactivate();
         }
     }
 }

@@ -16,8 +16,7 @@ namespace AzureFable.Models
         }
         public void Flee(int dx, int dy)
         {
-            X += dx;
-            Y += dy;
+            MoveBy(dx, dy);
         }
     }
 }

@@ -6,21 +6,21 @@ namespace AzureFable.Services
     {
         private readonly Random _random = new Random();
 
-        public bool CheckHeroVsEnemy(Hero hero, List<StandingEnemy> enemies)
+        public bool CheckHeroVsEnemy(Hero hero, IReadOnlyList<StandingEnemy> enemies)
         {
             foreach (StandingEnemy enemy in enemies)
             {
                 if (enemy.IsActive && enemy.X == hero.X && enemy.Y == hero.Y)
                 {
                     hero.TakeDamage(1);
-                    enemy.IsActive = false;
+                    enemy.Deactivate();
                     return true;
                 }
             }
             return false;
         }
 
-        public bool CheckHeroVsGhost(Hero hero, List<Ghost> ghosts, Maze maze)
+        public bool CheckHeroVsGhost(Hero hero, IReadOnlyList<Ghost> ghosts, Maze maze)
         {
             foreach (Ghost ghost in ghosts)
             {
@@ -65,7 +65,7 @@ namespace AzureFable.Services
             {
                 for (int x = 0; x < maze.Columns; x++)
                 {
-                    if (maze.Grid[y, x] is Floor floor && floor.Item == null
+                    if (maze.GetCell(x, y) is Floor floor && floor.Item == null
                         && !(maze.Hero.X == x && maze.Hero.Y == y))
                     {
                         freeCells.Add(floor);
@@ -80,11 +80,9 @@ namespace AzureFable.Services
 
             int index = _random.Next(freeCells.Count);
             Floor cell = freeCells[index];
-            Heart Heart = new Heart();
-            Heart.X = cell.X;
-            Heart.Y = cell.Y;
-            cell.Item = Heart;
-            maze.Items.Add(Heart);
+            Heart heart = new Heart();
+            cell.PlaceItem(heart);
+            maze.AddItem(heart);
         }
     }
 }

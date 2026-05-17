@@ -11,7 +11,7 @@ namespace AzureFable.Services
     {
         private readonly Random _random = new Random();
 
-        public void MoveGhosts(List<Ghost> ghosts, Maze maze)
+        public void MoveGhosts(IReadOnlyList<Ghost> ghosts, Maze maze)
         {
             foreach (Ghost ghost in ghosts)
             {

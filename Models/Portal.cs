@@ -18,7 +18,7 @@ namespace AzureFable.Models
         {
             if (hero.HasKey)
             {
-                IsActive = false;
+                Deactivate();
             }
         }
     }

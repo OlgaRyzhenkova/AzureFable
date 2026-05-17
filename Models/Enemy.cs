@@ -8,11 +8,9 @@ namespace AzureFable.Models
 {
     internal abstract class Enemy : Unit
     {
-        public Enums.AIBehaviour Behaviour { get; set; }
-        protected Enemy()
+        public Enums.AIBehaviour Behaviour { get; protected set; }
+        protected Enemy() : base(1)
         {
-            MaxHealth = 1;
-            Health = 1;
         }
     }
 }

@@ -8,20 +8,22 @@ namespace AzureFable.Models
 {
     internal class Hero : Unit
     {
-        public bool HasKey { get; set; } = false;
+        public bool HasKey { get; private set; } = false;
 
-        public Hero()
+        public Hero() : base(3)
         {
             Name = "Hero";
-            MaxHealth = 3;
-            Health = 3;
             ImagePath = "/Assets/Hero.png";
         }
 
         public void Move(int dx, int dy)
         {
-            X += dx;
-            Y += dy;
+            MoveBy(dx, dy);
+        }
+
+        public void CollectKey()
+        {
+            HasKey = true;
         }
     }
 }
