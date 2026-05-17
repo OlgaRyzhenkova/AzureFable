@@ -123,7 +123,7 @@ namespace AzureFable.Services
         {
             bool collision = _collisionService.CheckHeroVsEnemies(_maze.Hero, _maze.Enemies, _maze);
 
-            if (collision)
+            if (collision && _maze.Hero.IsAlive)
             {
                 _collisionService.SpawnHeart(_maze);
             }
