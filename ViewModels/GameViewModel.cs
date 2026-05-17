@@ -1,8 +1,6 @@
 ﻿using AzureFable.Models;
 using AzureFable.Services;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Windows;
 
 namespace AzureFable.ViewModels
 {
@@ -10,7 +8,6 @@ namespace AzureFable.ViewModels
     {
         private Maze _maze;
         private readonly MazeGenerator _mazeGenerator;
-        private readonly CollisionService _collisionService;
         private readonly GameEngine _gameEngine;
         private readonly Action _onWin;
         private readonly Action _onGameOver;
@@ -21,6 +18,11 @@ namespace AzureFable.ViewModels
             get => _gameState;
             private set
             {
+                if (_gameState == value)
+                {
+                    return;
+                }
+
                 _gameState = value;
                 OnPropertyChanged();
                 OnGameStateChanged(value);
@@ -58,20 +60,18 @@ namespace AzureFable.ViewModels
             _onWin = onWin;
             _onGameOver = onGameOver;
             _mazeGenerator = new MazeGenerator();
-            _collisionService = new CollisionService();
             GameObjects = new ObservableCollection<GameObject>();
             Cells = new ObservableCollection<Cell>();
             Hearts = new ObservableCollection<bool>();
 
             _maze = _mazeGenerator.Generate();
-            _gameEngine = new GameEngine(_maze, UpdateGame);
+            _gameEngine = new GameEngine(_maze, RefreshGame);
 
             HeroHealth = _maze.Hero.Health;
             HasKey = _maze.Hero.HasKey;
-            _gameState = Enums.GameState.Playing;
+            _gameState = _gameEngine.GameState;
 
-            UpdateGameState();
-            UpdateGame();
+            RefreshGame();
             _gameEngine.Start();
         }
 
@@ -105,102 +105,20 @@ namespace AzureFable.ViewModels
             else if (key == System.Windows.Input.Key.Right) dx = 1;
             else return;
 
-            int newX = _maze.Hero.X + dx;
-            int newY = _maze.Hero.Y + dy;
+            _gameEngine.MoveHero(dx, dy);
+        }
 
-            if (!_maze.IsPassable(newX, newY))
-            {
-                return;
-            }
-
-            _maze.Hero.Move(dx, dy);
-
-            CheckItemInteraction();
-            CheckEnemyInteraction();
+        private void RefreshGame()
+        {
             UpdateGameState();
             UpdateGame();
-
-            if (_gameState == Enums.GameState.Win)
-            {
-                OnGameStateChanged(Enums.GameState.Win);
-            }
-            else if (_gameState == Enums.GameState.GameOver)
-            {
-                OnGameStateChanged(Enums.GameState.GameOver);
-            }
-        }
-
-        private void CheckItemInteraction()
-        {
-            Cell cell = _maze.GetCell(_maze.Hero.X, _maze.Hero.Y);
-            Item? item = cell.Item;
-
-            if (item == null || !item.IsActive)
-            {
-                return;
-            }
-
-            Enums.ItemInteractionResult result = item.Interact(_maze.Hero);
-
-            switch (result)
-            {
-                case Enums.ItemInteractionResult.KeyCollected:
-                    SpawnPortal();
-                    break;
-                case Enums.ItemInteractionResult.Win:
-                    _gameState = Enums.GameState.Win;
-                    OnPropertyChanged(nameof(GameState));
-                    break;
-            }
-
-            if (!item.IsActive)
-            {
-                cell.RemoveItem();
-            }
-        }
-
-        private void SpawnPortal()
-        {
-            List<Floor> freeCells = new List<Floor>();
-
-            for (int y = 0; y < _maze.Rows; y++)
-            {
-                for (int x = 0; x < _maze.Columns; x++)
-                {
-                    if (_maze.GetCell(x, y) is Floor floor
-                        && floor.Item == null
-                        && !(_maze.Hero.X == x && _maze.Hero.Y == y)
-                        && !_maze.Enemies.Any(e => e.X == x && e.Y == y))
-                    {
-                        freeCells.Add(floor);
-                    }
-                }
-            }
-
-            if (freeCells.Count == 0) return;
-
-            Random random = new Random();
-            Floor portalCell = freeCells[random.Next(freeCells.Count)];
-
-            Portal portal = new Portal();
-            portalCell.PlaceItem(portal);
-            _maze.AddItem(portal);
-        }
-
-        private void CheckEnemyInteraction()
-        {
-            bool collision = _collisionService.CheckHeroVsEnemies(_maze.Hero, _maze.Enemies, _maze);
-
-            if (collision)
-            {
-                _collisionService.SpawnHeart(_maze);
-            }
         }
 
         private void UpdateGameState()
         {
             HeroHealth = _maze.Hero.Health;
             HasKey = _maze.Hero.HasKey;
+            GameState = _gameEngine.GameState;
 
             Hearts.Clear();
             for (int i = 0; i < _maze.Hero.Health; i++)
@@ -208,10 +126,6 @@ namespace AzureFable.ViewModels
                 Hearts.Add(true);
             }
 
-            if (_maze.Hero.Health <= 0)
-            {
-                GameState = Enums.GameState.GameOver;
-            }
         }
 
         private void UpdateGame()
