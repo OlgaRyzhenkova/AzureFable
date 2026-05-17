@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace AzureFable.Models
 {
-    internal abstract class Item : GameObject
+    internal abstract class Item : GameObject, IInteractable
     {
         public abstract Enums.ItemInteractionResult Interact(Hero hero);
     }
