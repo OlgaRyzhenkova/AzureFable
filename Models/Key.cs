@@ -13,10 +13,11 @@ namespace AzureFable.Models
             Name = "Key";
             ImagePath = "/Assets/Key.png";
         }
-        public override void Interact(Hero hero)
+        public override Enums.ItemInteractionResult Interact(Hero hero)
         {
             hero.CollectKey();
             Deactivate();
+            return Enums.ItemInteractionResult.KeyCollected;
         }
     }
 }

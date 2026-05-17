@@ -14,12 +14,15 @@ namespace AzureFable.Models
             ImagePath = "/Assets/Portal.png";
         }
 
-        public override void Interact(Hero hero)
+        public override Enums.ItemInteractionResult Interact(Hero hero)
         {
             if (hero.HasKey)
             {
                 Deactivate();
+                return Enums.ItemInteractionResult.Win;
             }
+
+            return Enums.ItemInteractionResult.None;
         }
     }
 }

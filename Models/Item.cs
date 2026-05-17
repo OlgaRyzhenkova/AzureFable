@@ -8,6 +8,6 @@ namespace AzureFable.Models
 {
     internal abstract class Item : GameObject
     {
-        public abstract void Interact(Hero hero);
+        public abstract Enums.ItemInteractionResult Interact(Hero hero);
     }
 }

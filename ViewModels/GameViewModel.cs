@@ -133,28 +133,28 @@ namespace AzureFable.ViewModels
         private void CheckItemInteraction()
         {
             Cell cell = _maze.GetCell(_maze.Hero.X, _maze.Hero.Y);
+            Item? item = cell.Item;
 
-            if (cell.Item != null && cell.Item.IsActive)
+            if (item == null || !item.IsActive)
             {
-                if (cell.Item is Portal)
-                {
-                    if (_maze.Hero.HasKey)
-                    {
-                        _gameState = Enums.GameState.Win;
-                        OnPropertyChanged(nameof(GameState));
-                    }
-                    return;
-                }
+                return;
+            }
 
-                if (cell.Item is Key)
-                {
-                    cell.Item.Interact(_maze.Hero);
+            Enums.ItemInteractionResult result = item.Interact(_maze.Hero);
+
+            switch (result)
+            {
+                case Enums.ItemInteractionResult.KeyCollected:
                     SpawnPortal();
-                    cell.RemoveItem();
-                    return;
-                }
+                    break;
+                case Enums.ItemInteractionResult.Win:
+                    _gameState = Enums.GameState.Win;
+                    OnPropertyChanged(nameof(GameState));
+                    break;
+            }
 
-                cell.Item.Interact(_maze.Hero);
+            if (!item.IsActive)
+            {
                 cell.RemoveItem();
             }
         }

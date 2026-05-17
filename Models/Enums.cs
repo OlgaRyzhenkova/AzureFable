@@ -26,5 +26,13 @@ namespace AzureFable.Models
             Standing,
             Random
         }
+
+        public enum ItemInteractionResult
+        {
+            None,
+            KeyCollected,
+            Healed,
+            Win
+        }
     }
 }

@@ -14,10 +14,11 @@ namespace AzureFable.Models
             ImagePath = "/Assets/Heart.png";
         }
 
-        public override void Interact(Hero hero)
+        public override Enums.ItemInteractionResult Interact(Hero hero)
         {
             hero.Heal(1);
             Deactivate();
+            return Enums.ItemInteractionResult.Healed;
         }
     }
 }
