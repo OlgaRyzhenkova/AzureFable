@@ -13,7 +13,7 @@ namespace AzureFable.Models
             ImagePath = "/Assets/Floor.png";
         }
 
-        public override bool IsPassable()
+        public override bool CanEnter(Unit? unit)
         {
             return true;
         }

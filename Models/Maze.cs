@@ -76,12 +76,17 @@ namespace AzureFable.Models
 
         public bool IsPassable(int x, int y)
         {
+            return CanEnter(x, y, null);
+        }
+
+        public bool CanEnter(int x, int y, Unit? unit)
+        {
             if (x < 0 || y < 0 || x >= Columns || y >= Rows)
             {
                 return false;
             }
 
-            return GetCell(x, y).IsPassable();
+            return GetCell(x, y).CanEnter(unit);
         }
     }
 }

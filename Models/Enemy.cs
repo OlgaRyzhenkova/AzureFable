@@ -23,7 +23,7 @@ namespace AzureFable.Models
             int newX = X + dx;
             int newY = Y + dy;
 
-            if (!maze.IsPassable(newX, newY))
+            if (!maze.CanEnter(newX, newY, this))
             {
                 return false;
             }

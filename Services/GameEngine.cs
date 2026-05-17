@@ -67,7 +67,7 @@ namespace AzureFable.Services
             int newX = _maze.Hero.X + dx;
             int newY = _maze.Hero.Y + dy;
 
-            if (!_maze.IsPassable(newX, newY))
+            if (!_maze.CanEnter(newX, newY, _maze.Hero))
             {
                 return;
             }

@@ -30,7 +30,12 @@ namespace AzureFable.Models
             Item = null;
         }
 
-        public abstract bool IsPassable();
+        public abstract bool CanEnter(Unit? unit);
+
+        public bool IsPassable()
+        {
+            return CanEnter(null);
+        }
 
         public void PlaceItem(Item item)
         {
