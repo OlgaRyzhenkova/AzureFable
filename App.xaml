@@ -133,5 +133,13 @@
                 </Setter.Value>
             </Setter>
         </Style>
+
+        <Style x:Key="HelpLineStyle" TargetType="TextBlock">
+            <Setter Property="Foreground" Value="#BAE8FF"/>
+            <Setter Property="FontFamily" Value="Constantia"/>
+            <Setter Property="FontSize" Value="18"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="Margin" Value="0,0,0,12"/>
+        </Style>
     </Application.Resources>
 </Application>

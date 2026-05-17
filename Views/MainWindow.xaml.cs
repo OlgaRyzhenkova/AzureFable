@@ -15,7 +15,7 @@ namespace AzureFable
             KeyDown += MainWindow_KeyDown;
             try
             {
-                _mainViewModel = new MainViewModel(ShowView, ShowGameOverScreen, ShowPauseScreen);
+                _mainViewModel = new MainViewModel(ShowView, ShowGameOverScreen, ShowPauseScreen, ShowGameHelpScreen);
                 ShowView(_mainViewModel.CurrentView);
             }
             catch (System.Exception ex)
@@ -45,6 +45,13 @@ namespace AzureFable
                 _gameView = new Views.GameView();
                 _gameView.SetViewModel(gameViewModel);
                 MainContent.Content = _gameView;
+            }
+            else if (viewModel is HelpViewModel helpViewModel)
+            {
+                var view = new Views.HelpView();
+                view.DataContext = helpViewModel;
+                MainContent.Content = view;
+                _gameView = null;
             }
         }
 
@@ -78,6 +85,17 @@ namespace AzureFable
                     _mainViewModel.ShowMenu();
                 }
             );
+        }
+
+        private void ShowGameHelpScreen()
+        {
+            var view = new Views.HelpView();
+            view.DataContext = new HelpViewModel(() =>
+            {
+                HideOverlay();
+                _mainViewModel.ResumeGame();
+            });
+            OverlayContent.Content = view;
         }
 
         private void HideOverlay()
