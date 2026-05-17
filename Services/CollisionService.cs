@@ -6,55 +6,16 @@ namespace AzureFable.Services
     {
         private readonly Random _random = new Random();
 
-        public bool CheckHeroVsEnemy(Hero hero, IReadOnlyList<StandingEnemy> enemies)
+        public bool CheckHeroVsEnemies(Hero hero, IReadOnlyList<Enemy> enemies, Maze maze)
         {
-            foreach (StandingEnemy enemy in enemies)
+            foreach (Enemy enemy in enemies)
             {
                 if (enemy.IsActive && enemy.X == hero.X && enemy.Y == hero.Y)
                 {
-                    hero.TakeDamage(1);
-                    enemy.Deactivate();
-                    return true;
+                    return enemy.Interact(hero, maze);
                 }
             }
             return false;
-        }
-
-        public bool CheckHeroVsGhost(Hero hero, IReadOnlyList<Ghost> ghosts, Maze maze)
-        {
-            foreach (Ghost ghost in ghosts)
-            {
-                if (ghost.IsActive && ghost.X == hero.X && ghost.Y == hero.Y)
-                {
-                    hero.TakeDamage(1);
-                    FleeGhost(ghost, maze);
-                    return true;
-                }
-            }
-            return false;
-        }
-
-        private void FleeGhost(Ghost ghost, Maze maze)
-        {
-            List<(int dx, int dy)> directions = new List<(int dx, int dy)>
-            {
-                (0, -1),
-                (0, 1),
-                (-1, 0),
-                (1, 0)
-            };
-
-            foreach (var dir in directions)
-            {
-                int newX = ghost.X + dir.dx;
-                int newY = ghost.Y + dir.dy;
-
-                if (maze.IsPassable(newX, newY))
-                {
-                    ghost.Flee(dir.dx, dir.dy);
-                    return;
-                }
-            }
         }
 
         public void SpawnHeart(Maze maze)

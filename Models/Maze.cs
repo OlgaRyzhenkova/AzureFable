@@ -9,13 +9,11 @@ namespace AzureFable.Models
     internal class Maze
     {
         private readonly Cell[,] _grid;
-        private readonly List<StandingEnemy> _enemies;
-        private readonly List<Ghost> _ghosts;
+        private readonly List<Enemy> _enemies;
         private readonly List<Item> _items;
 
         public Hero Hero { get; }
-        public IReadOnlyList<StandingEnemy> Enemies => _enemies;
-        public IReadOnlyList<Ghost> Ghosts => _ghosts;
+        public IReadOnlyList<Enemy> Enemies => _enemies;
         public IReadOnlyList<Item> Items => _items;
         public int Rows { get; private set; }
         public int Columns { get; private set; }
@@ -35,8 +33,7 @@ namespace AzureFable.Models
             Rows = rows;
             Columns = columns;
             _grid = new Cell[rows, columns];
-            _enemies = new List<StandingEnemy>();
-            _ghosts = new List<Ghost>();
+            _enemies = new List<Enemy>();
             _items = new List<Item>();
             Hero = new Hero();
         }
@@ -63,18 +60,11 @@ namespace AzureFable.Models
             return _grid[y, x];
         }
 
-        public void AddEnemy(StandingEnemy enemy)
+        public void AddEnemy(Enemy enemy)
         {
             ArgumentNullException.ThrowIfNull(enemy);
 
             _enemies.Add(enemy);
-        }
-
-        public void AddGhost(Ghost ghost)
-        {
-            ArgumentNullException.ThrowIfNull(ghost);
-
-            _ghosts.Add(ghost);
         }
 
         public void AddItem(Item item)

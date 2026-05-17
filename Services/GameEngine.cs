@@ -40,14 +40,9 @@ namespace AzureFable.Services
 
         private void OnTick(object? sender, EventArgs e)
         {
-            _enemyLogic.MoveGhosts(_maze.Ghosts, _maze);
+            _enemyLogic.MoveEnemies(_maze.Enemies, _maze);
 
-            bool collision = _collisionService.CheckHeroVsEnemy(_maze.Hero, _maze.Enemies);
-
-            if (!collision)
-            {
-                collision = _collisionService.CheckHeroVsGhost(_maze.Hero, _maze.Ghosts, _maze);
-            }
+            bool collision = _collisionService.CheckHeroVsEnemies(_maze.Hero, _maze.Enemies, _maze);
 
             if (collision)
             {

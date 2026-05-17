@@ -102,7 +102,7 @@ namespace AzureFable.Services
                 Floor cell = GetRandomFreeCell(freeCells);
                 Ghost ghost = new Ghost();
                 ghost.SetPosition(cell.X, cell.Y);
-                maze.AddGhost(ghost);
+                maze.AddEnemy(ghost);
             }
         }
 

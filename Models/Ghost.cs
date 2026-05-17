@@ -14,9 +14,42 @@ namespace AzureFable.Models
             ImagePath = "/Assets/Ghost.png";
             Behaviour = Enums.AIBehaviour.Random;
         }
-        public void Flee(int dx, int dy)
+
+        public override void Move(Maze maze, Random random)
         {
-            MoveBy(dx, dy);
+            foreach (var direction in GetShuffledDirections(random))
+            {
+                if (TryMove(maze, direction.dx, direction.dy))
+                {
+                    return;
+                }
+            }
+        }
+
+        public override bool Interact(Hero hero, Maze maze)
+        {
+            hero.TakeDamage(1);
+            Flee(maze);
+            return true;
+        }
+
+        private void Flee(Maze maze)
+        {
+            List<(int dx, int dy)> directions = new List<(int dx, int dy)>
+            {
+                (0, -1),
+                (0, 1),
+                (-1, 0),
+                (1, 0)
+            };
+
+            foreach (var direction in directions)
+            {
+                if (TryMove(maze, direction.dx, direction.dy))
+                {
+                    return;
+                }
+            }
         }
     }
 }

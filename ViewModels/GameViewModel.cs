@@ -170,8 +170,7 @@ namespace AzureFable.ViewModels
                     if (_maze.GetCell(x, y) is Floor floor
                         && floor.Item == null
                         && !(_maze.Hero.X == x && _maze.Hero.Y == y)
-                        && !_maze.Enemies.Any(e => e.X == x && e.Y == y)
-                        && !_maze.Ghosts.Any(g => g.X == x && g.Y == y))
+                        && !_maze.Enemies.Any(e => e.X == x && e.Y == y))
                     {
                         freeCells.Add(floor);
                     }
@@ -190,12 +189,7 @@ namespace AzureFable.ViewModels
 
         private void CheckEnemyInteraction()
         {
-            bool collision = _collisionService.CheckHeroVsEnemy(_maze.Hero, _maze.Enemies);
-
-            if (!collision)
-            {
-                collision = _collisionService.CheckHeroVsGhost(_maze.Hero, _maze.Ghosts, _maze);
-            }
+            bool collision = _collisionService.CheckHeroVsEnemies(_maze.Hero, _maze.Enemies, _maze);
 
             if (collision)
             {
@@ -239,17 +233,12 @@ namespace AzureFable.ViewModels
                 }
             }
 
-            foreach (StandingEnemy enemy in _maze.Enemies)
+            foreach (Enemy enemy in _maze.Enemies)
             {
                 if (enemy.IsActive)
                 {
                     GameObjects.Add(enemy);
                 }
-            }
-
-            foreach (Ghost ghost in _maze.Ghosts)
-            {
-                GameObjects.Add(ghost);
             }
 
             GameObjects.Add(_maze.Hero);

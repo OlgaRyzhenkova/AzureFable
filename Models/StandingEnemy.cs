@@ -14,5 +14,16 @@ namespace AzureFable.Models
             ImagePath = "/Assets/Enemy.png";
             Behaviour = Enums.AIBehaviour.Standing;
         }
+
+        public override void Move(Maze maze, Random random)
+        {
+        }
+
+        public override bool Interact(Hero hero, Maze maze)
+        {
+            hero.TakeDamage(1);
+            Deactivate();
+            return true;
+        }
     }
 }
