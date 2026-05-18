@@ -2,6 +2,8 @@
 
 namespace AzureFable.ViewModels
 {
+    using AzureFable.Models;
+
     internal class MainViewModel : ViewModelBase
     {
         private readonly Action<ViewModelBase> _showView;
@@ -24,6 +26,7 @@ namespace AzureFable.ViewModels
 
         private readonly MenuViewModel _menuViewModel;
         private GameViewModel? _gameViewModel;
+        private readonly GameSettings _settings;
 
         public MainViewModel(Action<ViewModelBase> showView, Action<bool> showGameOver, Action showPause, Action showGameHelp, Action showExitConfirmation)
         {
@@ -32,7 +35,8 @@ namespace AzureFable.ViewModels
             _showPause = showPause;
             _showGameHelp = showGameHelp;
             _showExitConfirmation = showExitConfirmation;
-            _menuViewModel = new MenuViewModel(StartGame, ShowHelp, ConfirmExit);
+            _settings = new GameSettings();
+            _menuViewModel = new MenuViewModel(StartGame, ShowSettings, ShowHelp, ConfirmExit);
             _currentView = _menuViewModel;
         }
 
@@ -42,7 +46,8 @@ namespace AzureFable.ViewModels
                 () => _showGameOver(true),
                 () => _showGameOver(false),
                 _showPause,
-                _showGameHelp
+                _showGameHelp,
+                _settings
             );
             CurrentView = _gameViewModel;
         }
@@ -65,6 +70,11 @@ namespace AzureFable.ViewModels
         public void ShowHelp()
         {
             _showView(new HelpViewModel(ShowMenu));
+        }
+
+        public void ShowSettings()
+        {
+            _showView(new SettingsViewModel(_settings, ShowMenu));
         }
 
         public void ConfirmExit()

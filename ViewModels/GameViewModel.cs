@@ -13,6 +13,7 @@ namespace AzureFable.ViewModels
         private readonly Action _onGameOver;
         private readonly Action _onPause;
         private readonly Action _onHelp;
+        private readonly GameSettings _settings;
 
         private Enums.GameState _gameState;
         public Enums.GameState GameState
@@ -59,12 +60,13 @@ namespace AzureFable.ViewModels
         public RelayCommand PauseCommand { get; }
         public RelayCommand HelpCommand { get; }
 
-        public GameViewModel(Action onWin, Action onGameOver, Action onPause, Action onHelp)
+        public GameViewModel(Action onWin, Action onGameOver, Action onPause, Action onHelp, GameSettings settings)
         {
             _onWin = onWin;
             _onGameOver = onGameOver;
             _onPause = onPause;
             _onHelp = onHelp;
+            _settings = settings;
             _mazeGenerator = new MazeGenerator();
             GameObjects = new ObservableCollection<GameObject>();
             Cells = new ObservableCollection<Cell>();
@@ -73,7 +75,7 @@ namespace AzureFable.ViewModels
             HelpCommand = new RelayCommand(ShowHelp);
 
             _maze = _mazeGenerator.Generate();
-            _gameEngine = new GameEngine(_maze, RefreshGame);
+            _gameEngine = new GameEngine(_maze, RefreshGame, _settings.EnemyMoveInterval);
 
             HeroHealth = _maze.Hero.Health;
             HasKey = _maze.Hero.HasKey;

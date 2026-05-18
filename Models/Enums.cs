@@ -34,5 +34,12 @@ namespace AzureFable.Models
             Healed,
             Win
         }
+
+        public enum GameDifficulty
+        {
+            Easy,
+            Normal,
+            Hard
+        }
     }
 }

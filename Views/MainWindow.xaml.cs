@@ -53,6 +53,13 @@ namespace AzureFable
                 MainContent.Content = view;
                 _gameView = null;
             }
+            else if (viewModel is SettingsViewModel settingsViewModel)
+            {
+                var view = new Views.SettingsView();
+                view.DataContext = settingsViewModel;
+                MainContent.Content = view;
+                _gameView = null;
+            }
         }
 
         private void ShowGameOverScreen(bool isWin)

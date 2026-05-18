@@ -19,6 +19,11 @@
                     Style="{StaticResource PrimaryButtonStyle}"
                     Margin="0,0,0,18"/>
 
+            <Button Content="Налаштування"
+                    Command="{Binding SettingsCommand}"
+                    Style="{StaticResource PrimaryButtonStyle}"
+                    Margin="0,0,0,18"/>
+
             <Button Content="Довідка"
                     Command="{Binding HelpCommand}"
                     Style="{StaticResource PrimaryButtonStyle}"

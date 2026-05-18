@@ -19,7 +19,7 @@ namespace AzureFable.Services
 
         public Enums.GameState GameState { get; private set; }
 
-        public GameEngine(Maze maze, Action onUpdate)
+        public GameEngine(Maze maze, Action onUpdate, TimeSpan enemyMoveInterval)
         {
             _maze = maze;
             _onUpdate = onUpdate;
@@ -29,7 +29,7 @@ namespace AzureFable.Services
             GameState = Enums.GameState.Playing;
 
             _timer = new DispatcherTimer();
-            _timer.Interval = TimeSpan.FromMilliseconds(500);
+            _timer.Interval = enemyMoveInterval;
             _timer.Tick += OnTick;
         }
 
