@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace AzureFable.Services
 {
-    internal class EnemyLogic
+    internal class EnemyLogic : IEnemyLogic
     {
         private readonly Random _random = new Random();
 

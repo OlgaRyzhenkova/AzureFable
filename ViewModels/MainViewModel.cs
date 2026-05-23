@@ -3,6 +3,7 @@
 namespace AzureFable.ViewModels
 {
     using AzureFable.Models;
+    using AzureFable.Services;
 
     internal class MainViewModel : ViewModelBase
     {
@@ -47,7 +48,9 @@ namespace AzureFable.ViewModels
                 () => _showGameOver(false),
                 _showPause,
                 _showGameHelp,
-                _settings
+                _settings,
+                new EnemyLogic(),
+                new CollisionService()
             );
             CurrentView = _gameViewModel;
         }

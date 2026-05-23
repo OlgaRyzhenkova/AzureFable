@@ -2,7 +2,7 @@
 
 namespace AzureFable.Services
 {
-    internal class CollisionService
+    internal class CollisionService : ICollisionService
     {
         private readonly Random _random = new Random();
 

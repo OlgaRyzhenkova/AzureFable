@@ -61,7 +61,14 @@ namespace AzureFable.ViewModels
         public RelayCommand PauseCommand { get; }
         public RelayCommand HelpCommand { get; }
 
-        public GameViewModel(Action onWin, Action onGameOver, Action onPause, Action onHelp, GameSettings settings)
+        public GameViewModel(
+            Action onWin,
+            Action onGameOver,
+            Action onPause,
+            Action onHelp,
+            GameSettings settings,
+            IEnemyLogic enemyLogic,
+            ICollisionService collisionService)
         {
             _onWin = onWin;
             _onGameOver = onGameOver;
@@ -76,7 +83,12 @@ namespace AzureFable.ViewModels
             HelpCommand = new RelayCommand(ShowHelp);
 
             _maze = _mazeGenerator.Generate();
-            _gameEngine = new GameEngine(_maze, RefreshGame, _settings.EnemyMoveInterval);
+            _gameEngine = new GameEngine(
+                _maze,
+                RefreshGame,
+                _settings.EnemyMoveInterval,
+                enemyLogic,
+                collisionService);
 
             HeroHealth = _maze.Hero.Health;
             HasKey = _maze.Hero.HasKey;

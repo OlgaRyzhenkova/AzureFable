@@ -12,20 +12,30 @@ namespace AzureFable.Services
     internal class GameEngine
     {
         private readonly DispatcherTimer _timer;
-        private readonly EnemyLogic _enemyLogic;
-        private readonly CollisionService _collisionService;
+        private readonly IEnemyLogic _enemyLogic;
+        private readonly ICollisionService _collisionService;
         private readonly Random _random;
         private Maze _maze;
         private Action _onUpdate;
 
         public GameStateEnum GameState { get; private set; }
 
-        public GameEngine(Maze maze, Action onUpdate, TimeSpan enemyMoveInterval)
+        public GameEngine(
+            Maze maze,
+            Action onUpdate,
+            TimeSpan enemyMoveInterval,
+            IEnemyLogic enemyLogic,
+            ICollisionService collisionService)
         {
+            ArgumentNullException.ThrowIfNull(maze);
+            ArgumentNullException.ThrowIfNull(onUpdate);
+            ArgumentNullException.ThrowIfNull(enemyLogic);
+            ArgumentNullException.ThrowIfNull(collisionService);
+
             _maze = maze;
             _onUpdate = onUpdate;
-            _enemyLogic = new EnemyLogic();
-            _collisionService = new CollisionService();
+            _enemyLogic = enemyLogic;
+            _collisionService = collisionService;
             _random = new Random();
             GameState = GameStateEnum.Playing;
 
