@@ -47,7 +47,8 @@ namespace AzureFable.ViewModels
                 _showGameHelp,
                 _settings,
                 new EnemyLogic(),
-                new CollisionService()
+                new CollisionService(),
+                new ItemSpawnService()
             );
             CurrentView = _gameViewModel;
         }

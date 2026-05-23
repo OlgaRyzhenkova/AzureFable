@@ -1,9 +1,5 @@
 using AzureFable.Models;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Threading;
 using GameStateEnum = AzureFable.Models.GameState;
 
@@ -14,7 +10,7 @@ namespace AzureFable.Services
         private readonly DispatcherTimer _timer;
         private readonly IEnemyLogic _enemyLogic;
         private readonly ICollisionService _collisionService;
-        private readonly Random _random;
+        private readonly IItemSpawnService _itemSpawnService;
         private Maze _maze;
         private Action _onUpdate;
 
@@ -25,18 +21,20 @@ namespace AzureFable.Services
             Action onUpdate,
             TimeSpan enemyMoveInterval,
             IEnemyLogic enemyLogic,
-            ICollisionService collisionService)
+            ICollisionService collisionService,
+            IItemSpawnService itemSpawnService)
         {
             ArgumentNullException.ThrowIfNull(maze);
             ArgumentNullException.ThrowIfNull(onUpdate);
             ArgumentNullException.ThrowIfNull(enemyLogic);
             ArgumentNullException.ThrowIfNull(collisionService);
+            ArgumentNullException.ThrowIfNull(itemSpawnService);
 
             _maze = maze;
             _onUpdate = onUpdate;
             _enemyLogic = enemyLogic;
             _collisionService = collisionService;
-            _random = new Random();
+            _itemSpawnService = itemSpawnService;
             GameState = GameStateEnum.Playing;
 
             _timer = new DispatcherTimer();
@@ -139,7 +137,7 @@ namespace AzureFable.Services
             switch (result)
             {
                 case ItemInteractionResult.KeyCollected:
-                    SpawnPortal();
+                    _itemSpawnService.SpawnPortal(_maze);
                     break;
                 case ItemInteractionResult.Win:
                     SetGameState(GameStateEnum.Win);
@@ -160,35 +158,6 @@ namespace AzureFable.Services
             {
                 _collisionService.SpawnHeart(_maze);
             }
-        }
-
-        private void SpawnPortal()
-        {
-            List<Floor> freeCells = new List<Floor>();
-
-            for (int y = 0; y < _maze.Rows; y++)
-            {
-                for (int x = 0; x < _maze.Columns; x++)
-                {
-                    if (_maze.GetCell(x, y) is Floor floor
-                        && floor.Item == null
-                        && !(_maze.Hero.X == x && _maze.Hero.Y == y)
-                        && !_maze.Enemies.Any(e => e.X == x && e.Y == y))
-                    {
-                        freeCells.Add(floor);
-                    }
-                }
-            }
-
-            if (freeCells.Count == 0)
-            {
-                return;
-            }
-
-            Floor portalCell = freeCells[_random.Next(freeCells.Count)];
-            Portal portal = new Portal();
-            portalCell.PlaceItem(portal);
-            _maze.AddItem(portal);
         }
 
         private void UpdateGameState()

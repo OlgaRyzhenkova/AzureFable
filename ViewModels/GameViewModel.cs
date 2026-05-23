@@ -68,7 +68,8 @@ namespace AzureFable.ViewModels
             Action onHelp,
             GameSettings settings,
             IEnemyLogic enemyLogic,
-            ICollisionService collisionService)
+            ICollisionService collisionService,
+            IItemSpawnService itemSpawnService)
         {
             _onWin = onWin;
             _onGameOver = onGameOver;
@@ -88,7 +89,8 @@ namespace AzureFable.ViewModels
                 RefreshGame,
                 _settings.EnemyMoveInterval,
                 enemyLogic,
-                collisionService);
+                collisionService,
+                itemSpawnService);
 
             HeroHealth = _maze.Hero.Health;
             HasKey = _maze.Hero.HasKey;
