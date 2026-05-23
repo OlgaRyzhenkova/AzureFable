@@ -12,15 +12,13 @@ namespace AzureFable
         {
             InitializeComponent();
             KeyDown += MainWindow_KeyDown;
-            try
-            {
-                _mainViewModel = new MainViewModel(ShowGameOverScreen, ShowPauseScreen, ShowGameHelpScreen, ShowExitConfirmation);
-                DataContext = _mainViewModel;
-            }
-            catch (System.Exception ex)
-            {
-                MessageBox.Show(ex.Message + "\n\n" + ex.StackTrace, "Помилка");
-            }
+            _mainViewModel = new MainViewModel(
+                ShowGameOverScreen,
+                ShowPauseScreen,
+                ShowGameHelpScreen,
+                ShowExitConfirmation,
+                ShowError);
+            DataContext = _mainViewModel;
         }
 
         private void MainWindow_KeyDown(object sender, KeyEventArgs e)
@@ -93,6 +91,11 @@ namespace AzureFable
         private void HideOverlay()
         {
             OverlayContent.Content = null;
+        }
+
+        private void ShowError(string message)
+        {
+            MessageBox.Show(message, "Помилка запуску", MessageBoxButton.OK, MessageBoxImage.Error);
         }
     }
 }

@@ -11,6 +11,7 @@ namespace AzureFable.ViewModels
         private readonly Action _showPause;
         private readonly Action _showGameHelp;
         private readonly Action _showExitConfirmation;
+        private readonly Action<string> _showError;
         private ViewModelBase _currentView;
 
         public ViewModelBase CurrentView
@@ -27,12 +28,18 @@ namespace AzureFable.ViewModels
         private GameViewModel? _gameViewModel;
         private readonly GameSettings _settings;
 
-        public MainViewModel(Action<bool> showGameOver, Action showPause, Action showGameHelp, Action showExitConfirmation)
+        public MainViewModel(
+            Action<bool> showGameOver,
+            Action showPause,
+            Action showGameHelp,
+            Action showExitConfirmation,
+            Action<string> showError)
         {
             _showGameOver = showGameOver;
             _showPause = showPause;
             _showGameHelp = showGameHelp;
             _showExitConfirmation = showExitConfirmation;
+            _showError = showError;
             _settings = new GameSettings();
             _menuViewModel = new MenuViewModel(StartGame, ShowSettings, ShowHelp, ConfirmExit);
             _currentView = _menuViewModel;
@@ -40,17 +47,24 @@ namespace AzureFable.ViewModels
 
         public void StartGame()
         {
-            _gameViewModel = new GameViewModel(
-                () => _showGameOver(true),
-                () => _showGameOver(false),
-                _showPause,
-                _showGameHelp,
-                _settings,
-                new EnemyLogic(),
-                new CollisionService(),
-                new ItemSpawnService()
-            );
-            CurrentView = _gameViewModel;
+            try
+            {
+                _gameViewModel = new GameViewModel(
+                    () => _showGameOver(true),
+                    () => _showGameOver(false),
+                    _showPause,
+                    _showGameHelp,
+                    _settings,
+                    new EnemyLogic(),
+                    new CollisionService(),
+                    new ItemSpawnService()
+                );
+                CurrentView = _gameViewModel;
+            }
+            catch (MazeGenerationException ex)
+            {
+                _showError(ex.Message);
+            }
         }
 
         public void ResumeGame()

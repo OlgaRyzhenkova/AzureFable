@@ -28,7 +28,11 @@ namespace AzureFable.Services
         public Maze Generate()
         {
             int rows = Layout.Length;
+            ValidateLayoutRows(rows);
+
             int columns = Layout[0].Length;
+            ValidateLayout(rows, columns);
+
             Hero hero = new Hero();
             Maze maze = new Maze(rows, columns, hero);
 
@@ -60,8 +64,37 @@ namespace AzureFable.Services
             return maze;
         }
 
+        private void ValidateLayoutRows(int rows)
+        {
+            if (rows == 0)
+            {
+                throw new MazeGenerationException("Maze layout cannot be empty.");
+            }
+        }
+
+        private void ValidateLayout(int rows, int columns)
+        {
+            if (columns == 0)
+            {
+                throw new MazeGenerationException("Maze layout cannot be empty.");
+            }
+
+            foreach (string row in Layout)
+            {
+                if (row.Length != columns)
+                {
+                    throw new MazeGenerationException("Maze layout rows must have the same length.");
+                }
+            }
+        }
+
         private Floor GetRandomFreeCell(List<Floor> freeCells)
         {
+            if (freeCells.Count == 0)
+            {
+                throw new MazeGenerationException("Maze does not have enough free cells for all objects.");
+            }
+
             int index = _random.Next(freeCells.Count);
             Floor cell = freeCells[index];
             freeCells.RemoveAt(index);

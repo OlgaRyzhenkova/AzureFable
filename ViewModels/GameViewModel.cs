@@ -1,5 +1,6 @@
 using AzureFable.Models;
 using AzureFable.Services;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using GameStateEnum = AzureFable.Models.GameState;
 
@@ -96,6 +97,7 @@ namespace AzureFable.ViewModels
             HasKey = _maze.Hero.HasKey;
             _gameState = _gameEngine.GameState;
 
+            InitializeCells();
             RefreshGame();
             _gameEngine.Start();
         }
@@ -177,7 +179,7 @@ namespace AzureFable.ViewModels
         private void RefreshGame()
         {
             UpdateGameState();
-            UpdateGame();
+            UpdateGameObjects();
         }
 
         private void UpdateGameState()
@@ -186,29 +188,35 @@ namespace AzureFable.ViewModels
             HasKey = _maze.Hero.HasKey;
             GameState = _gameEngine.GameState;
 
-            Hearts.Clear();
-            for (int i = 0; i < _maze.Hero.Health; i++)
-            {
-                Hearts.Add(true);
-            }
-
+            SyncHearts(_maze.Hero.Health);
         }
 
-        private void UpdateGame()
+        private void InitializeCells()
         {
             Cells.Clear();
-            GameObjects.Clear();
+
+            for (int y = 0; y < _maze.Rows; y++)
+            {
+                for (int x = 0; x < _maze.Columns; x++)
+                {
+                    Cells.Add(_maze.GetCell(x, y));
+                }
+            }
+        }
+
+        private void UpdateGameObjects()
+        {
+            List<GameObject> currentObjects = new List<GameObject>();
 
             for (int y = 0; y < _maze.Rows; y++)
             {
                 for (int x = 0; x < _maze.Columns; x++)
                 {
                     Cell cell = _maze.GetCell(x, y);
-                    Cells.Add(cell);
 
                     if (cell.Item != null && cell.Item.IsActive)
                     {
-                        GameObjects.Add(cell.Item);
+                        currentObjects.Add(cell.Item);
                     }
                 }
             }
@@ -217,11 +225,51 @@ namespace AzureFable.ViewModels
             {
                 if (enemy.IsActive)
                 {
-                    GameObjects.Add(enemy);
+                    currentObjects.Add(enemy);
                 }
             }
 
-            GameObjects.Add(_maze.Hero);
+            currentObjects.Add(_maze.Hero);
+            SyncGameObjects(currentObjects);
+        }
+
+        private void SyncHearts(int health)
+        {
+            while (Hearts.Count > health)
+            {
+                Hearts.RemoveAt(Hearts.Count - 1);
+            }
+
+            while (Hearts.Count < health)
+            {
+                Hearts.Add(true);
+            }
+        }
+
+        private void SyncGameObjects(List<GameObject> currentObjects)
+        {
+            for (int i = GameObjects.Count - 1; i >= 0; i--)
+            {
+                if (!currentObjects.Contains(GameObjects[i]))
+                {
+                    GameObjects.RemoveAt(i);
+                }
+            }
+
+            for (int i = 0; i < currentObjects.Count; i++)
+            {
+                GameObject gameObject = currentObjects[i];
+                int currentIndex = GameObjects.IndexOf(gameObject);
+
+                if (currentIndex < 0)
+                {
+                    GameObjects.Insert(i, gameObject);
+                }
+                else if (currentIndex != i)
+                {
+                    GameObjects.Move(currentIndex, i);
+                }
+            }
         }
     }
 }
