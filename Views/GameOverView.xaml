@@ -1,36 +1,136 @@
-﻿<UserControl x:Class="AzureFable.Views.GameOverView"
+<UserControl x:Class="AzureFable.Views.GameOverView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
-    <Grid Background="{StaticResource BackgroundBrush}">
+    <UserControl.Resources>
+        <Style x:Key="ResultButtonStyle" TargetType="Button">
+            <Setter Property="Height" Value="54"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Foreground" Value="#D9F5FF"/>
+            <Setter Property="FontFamily" Value="Constantia"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border x:Name="ButtonBorder"
+                                Background="#E6051121"
+                                BorderBrush="#7700D2FF"
+                                BorderThickness="1.2"
+                                CornerRadius="4">
+                            <Border.Effect>
+                                <DropShadowEffect Color="#00D2FF"
+                                                  BlurRadius="8"
+                                                  ShadowDepth="0"
+                                                  Opacity="0.24"/>
+                            </Border.Effect>
+                            <StackPanel Orientation="Horizontal"
+                                        HorizontalAlignment="Center"
+                                        VerticalAlignment="Center">
+                                <TextBlock Text="{TemplateBinding Tag}"
+                                           Foreground="#00D2FF"
+                                           FontSize="18"
+                                           Margin="0,0,10,0"
+                                           VerticalAlignment="Center"/>
+                                <ContentPresenter VerticalAlignment="Center"
+                                                  RecognizesAccessKey="False"/>
+                            </StackPanel>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="ButtonBorder" Property="Background" Value="#E60A2A45"/>
+                                <Setter TargetName="ButtonBorder" Property="BorderBrush" Value="#00FFFF"/>
+                                <Setter Property="Foreground" Value="White"/>
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter TargetName="ButtonBorder" Property="Opacity" Value="0.72"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </UserControl.Resources>
 
-        <StackPanel VerticalAlignment="Center"
-                    HorizontalAlignment="Center"
-                    Width="420">
+    <Grid Background="#99000000"
+          TextOptions.TextFormattingMode="Display"
+          TextOptions.TextRenderingMode="ClearType">
 
-            <TextBlock x:Name="TitleText"
-                       Style="{StaticResource ScreenTitleStyle}"
-                       FontSize="52"
-                       HorizontalAlignment="Center"
-                       Margin="0,0,0,14"/>
+        <Border Width="560"
+                Height="350"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                Background="#F2030D1E"
+                BorderBrush="#9900D2FF"
+                BorderThickness="1.5"
+                CornerRadius="8">
+            <Border.Effect>
+                <DropShadowEffect Color="#00D2FF"
+                                  BlurRadius="20"
+                                  ShadowDepth="0"
+                                  Opacity="0.36"/>
+            </Border.Effect>
 
-            <TextBlock x:Name="SubtitleText"
-                       Style="{StaticResource ScreenSubtitleStyle}"
-                       TextAlignment="Center"
-                       Margin="0,0,0,54"/>
+            <StackPanel VerticalAlignment="Center"
+                        HorizontalAlignment="Center"
+                        Margin="34,28">
 
-            <Button Content="Грати знову"
-                    x:Name="PlayAgainButton"
-                    Style="{StaticResource PrimaryButtonStyle}"
-                    Margin="0,0,0,18"
-                    Click="PlayAgainButton_Click"/>
+                <TextBlock x:Name="TitleText"
+                           FontFamily="Constantia"
+                           FontSize="46"
+                           FontWeight="Bold"
+                           HorizontalAlignment="Center"
+                           TextAlignment="Center"
+                           Margin="0,0,0,8">
+                    <TextBlock.Effect>
+                        <DropShadowEffect BlurRadius="24"
+                                          ShadowDepth="0"
+                                          Opacity="0.9"/>
+                    </TextBlock.Effect>
+                </TextBlock>
 
-            <Button Content="Головне меню"
-                    x:Name="MenuButton"
-                    Style="{StaticResource PrimaryButtonStyle}"
-                    Click="MenuButton_Click"/>
+                <TextBlock x:Name="SubtitleText"
+                           Foreground="#92AFC3"
+                           FontFamily="Constantia"
+                           FontSize="15"
+                           FontWeight="SemiBold"
+                           HorizontalAlignment="Center"
+                           TextAlignment="Center"
+                           Margin="0,0,0,24"/>
 
-        </StackPanel>
+                <Rectangle Height="1"
+                           Width="430"
+                           Fill="#5500D2FF"
+                           Margin="0,0,0,26"/>
 
+                <StackPanel Orientation="Horizontal"
+                            HorizontalAlignment="Center">
+                    <Button x:Name="PlayAgainButton"
+                            Style="{StaticResource ResultButtonStyle}"
+                            Tag="✦"
+                            Width="205"
+                            FontSize="19"
+                            Margin="0,0,20,0"
+                            IsDefault="True"
+                            Click="PlayAgainButton_Click">
+                        <TextBlock Text="Нова гра"
+                                   FontFamily="Constantia"
+                                   FontSize="19"
+                                   FontWeight="Bold"/>
+                    </Button>
+
+                    <Button x:Name="MenuButton"
+                            Style="{StaticResource ResultButtonStyle}"
+                            Tag="⌂"
+                            Width="190"
+                            FontSize="17"
+                            Click="MenuButton_Click">
+                        <TextBlock Text="Головне меню"
+                                   FontFamily="Constantia"
+                                   FontSize="17"
+                                   FontWeight="Bold"/>
+                    </Button>
+                </StackPanel>
+            </StackPanel>
+        </Border>
     </Grid>
 </UserControl>

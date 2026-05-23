@@ -1,5 +1,8 @@
-﻿using System;
+using System;
+using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media;
+using System.Windows.Media.Effects;
 
 namespace AzureFable.Views
 {
@@ -14,29 +17,40 @@ namespace AzureFable.Views
 
             _onPlayAgain = onPlayAgain;
             _onMenu = onMenu;
+            ApplyResult(isWin);
+        }
 
+        private void ApplyResult(bool isWin)
+        {
             if (isWin)
             {
-                TitleText.Text = "Перемога!";
-                TitleText.Foreground = new System.Windows.Media.SolidColorBrush(
-                    System.Windows.Media.Color.FromRgb(91, 200, 245));
-                SubtitleText.Text = "Ви пройшли лабіринт!";
+                TitleText.Text = "ПЕРЕМОГА!";
+                TitleText.Foreground = new SolidColorBrush(Color.FromRgb(245, 200, 66));
+                SubtitleText.Text = "Ви знайшли ключ і вийшли з лабіринту!";
+                SetTitleGlow(Color.FromRgb(245, 200, 66));
+                return;
             }
-            else
+
+            TitleText.Text = "ГРУ ЗАВЕРШЕНО";
+            TitleText.Foreground = new SolidColorBrush(Color.FromRgb(220, 48, 58));
+            SubtitleText.Text = "Усі життя вичерпано. Спробуйте ще раз!";
+            SetTitleGlow(Color.FromRgb(220, 48, 58));
+        }
+
+        private void SetTitleGlow(Color color)
+        {
+            if (TitleText.Effect is DropShadowEffect glow)
             {
-                TitleText.Text = "Кінець гри";
-                TitleText.Foreground = new System.Windows.Media.SolidColorBrush(
-                    System.Windows.Media.Color.FromRgb(220, 50, 50));
-                SubtitleText.Text = "Ви загинули у лабіринті...";
+                glow.Color = color;
             }
         }
 
-        private void PlayAgainButton_Click(object sender, System.Windows.RoutedEventArgs e)
+        private void PlayAgainButton_Click(object sender, RoutedEventArgs e)
         {
             _onPlayAgain();
         }
 
-        private void MenuButton_Click(object sender, System.Windows.RoutedEventArgs e)
+        private void MenuButton_Click(object sender, RoutedEventArgs e)
         {
             _onMenu();
         }
