@@ -35,15 +35,7 @@ namespace AzureFable.Models
 
         private void Flee(Maze maze)
         {
-            List<(int dx, int dy)> directions = new List<(int dx, int dy)>
-            {
-                (0, -1),
-                (0, 1),
-                (-1, 0),
-                (1, 0)
-            };
-
-            foreach (var direction in directions)
+            foreach (var direction in GetShuffledDirections(Random.Shared))
             {
                 if (TryMove(maze, direction.dx, direction.dy))
                 {

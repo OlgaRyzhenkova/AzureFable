@@ -18,6 +18,11 @@ namespace AzureFable.Models
 
         public void Move(int dx, int dy)
         {
+            if (Math.Abs(dx) + Math.Abs(dy) != 1)
+            {
+                throw new ArgumentException("Hero can move only one cell horizontally or vertically.");
+            }
+
             MoveBy(dx, dy);
         }
 
