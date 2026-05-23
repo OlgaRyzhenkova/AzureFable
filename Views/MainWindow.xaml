@@ -1,6 +1,8 @@
 ﻿<Window x:Class="AzureFable.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:viewModels="clr-namespace:AzureFable.ViewModels"
+        xmlns:views="clr-namespace:AzureFable.Views"
         Title="Azure Fable"
         Height="600"
         Width="1000"
@@ -8,8 +10,27 @@
         ResizeMode="NoResize"
         Background="{StaticResource BackgroundBrush}">
 
+    <Window.Resources>
+        <DataTemplate DataType="{x:Type viewModels:MenuViewModel}">
+            <views:MenuView/>
+        </DataTemplate>
+
+        <DataTemplate DataType="{x:Type viewModels:GameViewModel}">
+            <views:GameView/>
+        </DataTemplate>
+
+        <DataTemplate DataType="{x:Type viewModels:HelpViewModel}">
+            <views:HelpView/>
+        </DataTemplate>
+
+        <DataTemplate DataType="{x:Type viewModels:SettingsViewModel}">
+            <views:SettingsView/>
+        </DataTemplate>
+    </Window.Resources>
+
     <Grid>
-        <ContentControl x:Name="MainContent"/>
+        <ContentControl x:Name="MainContent"
+                        Content="{Binding CurrentView}"/>
         <ContentControl x:Name="OverlayContent"
                         Panel.ZIndex="10"/>
     </Grid>

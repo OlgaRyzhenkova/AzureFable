@@ -6,8 +6,7 @@ namespace AzureFable
 {
     public partial class MainWindow : Window
     {
-        private readonly MainViewModel _mainViewModel;
-        private Views.GameView? _gameView;
+        private MainViewModel? _mainViewModel;
 
         public MainWindow()
         {
@@ -15,8 +14,8 @@ namespace AzureFable
             KeyDown += MainWindow_KeyDown;
             try
             {
-                _mainViewModel = new MainViewModel(ShowView, ShowGameOverScreen, ShowPauseScreen, ShowGameHelpScreen, ShowExitConfirmation);
-                ShowView(_mainViewModel.CurrentView);
+                _mainViewModel = new MainViewModel(ShowGameOverScreen, ShowPauseScreen, ShowGameHelpScreen, ShowExitConfirmation);
+                DataContext = _mainViewModel;
             }
             catch (System.Exception ex)
             {
@@ -26,50 +25,27 @@ namespace AzureFable
 
         private void MainWindow_KeyDown(object sender, KeyEventArgs e)
         {
-            _gameView?.ViewModel?.MoveHero(e.Key);
-        }
-
-        private void ShowView(ViewModelBase viewModel)
-        {
-            HideOverlay();
-
-            if (viewModel is MenuViewModel menuViewModel)
+            if (_mainViewModel?.CurrentView is GameViewModel gameViewModel)
             {
-                var view = new Views.MenuView();
-                view.DataContext = menuViewModel;
-                MainContent.Content = view;
-                _gameView = null;
-            }
-            else if (viewModel is GameViewModel gameViewModel)
-            {
-                _gameView = new Views.GameView();
-                _gameView.SetViewModel(gameViewModel);
-                MainContent.Content = _gameView;
-            }
-            else if (viewModel is HelpViewModel helpViewModel)
-            {
-                var view = new Views.HelpView();
-                view.DataContext = helpViewModel;
-                MainContent.Content = view;
-                _gameView = null;
-            }
-            else if (viewModel is SettingsViewModel settingsViewModel)
-            {
-                var view = new Views.SettingsView();
-                view.DataContext = settingsViewModel;
-                MainContent.Content = view;
-                _gameView = null;
+                gameViewModel.MoveHero(e.Key);
             }
         }
 
         private void ShowGameOverScreen(bool isWin)
         {
             HideOverlay();
-            _gameView = null;
-            MainContent.Content = new Views.GameOverView(
+            OverlayContent.Content = new Views.GameOverView(
                 isWin,
-                () => _mainViewModel.StartGame(),
-                () => _mainViewModel.ShowMenu()
+                () =>
+                {
+                    HideOverlay();
+                    _mainViewModel?.StartGame();
+                },
+                () =>
+                {
+                    HideOverlay();
+                    _mainViewModel?.ShowMenu();
+                }
             );
         }
 
@@ -79,17 +55,17 @@ namespace AzureFable
                 () =>
                 {
                     HideOverlay();
-                    _mainViewModel.ResumeGame();
+                    _mainViewModel?.ResumeGame();
                 },
                 () =>
                 {
                     HideOverlay();
-                    _mainViewModel.StartGame();
+                    _mainViewModel?.StartGame();
                 },
                 () =>
                 {
                     HideOverlay();
-                    _mainViewModel.ShowMenu();
+                    _mainViewModel?.ShowMenu();
                 }
             );
         }
@@ -100,7 +76,7 @@ namespace AzureFable
             view.DataContext = new HelpViewModel(() =>
             {
                 HideOverlay();
-                _mainViewModel.ResumeGame();
+                _mainViewModel?.ResumeGame();
             });
             OverlayContent.Content = view;
         }

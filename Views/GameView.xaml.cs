@@ -6,17 +6,11 @@ namespace AzureFable.Views
 {
     public partial class GameView : UserControl
     {
-        internal GameViewModel? ViewModel { get; private set; }
+        private GameViewModel? ViewModel => DataContext as GameViewModel;
 
         public GameView()
         {
             InitializeComponent();
-        }
-
-        internal void SetViewModel(GameViewModel viewModel)
-        {
-            ViewModel = viewModel;
-            DataContext = viewModel;
         }
 
         private void UserControl_KeyDown(object sender, KeyEventArgs e)
