@@ -16,6 +16,7 @@
     <None Remove="Assets\Heart.png" />
     <None Remove="Assets\Hero.png" />
     <None Remove="Assets\Key.png" />
+    <None Remove="Assets\Menu.jpg" />
     <None Remove="Assets\Portal.png" />
     <None Remove="Assets\Wall.png" />
   </ItemGroup>
@@ -28,6 +29,7 @@
     <Resource Include="Assets\Heart.png" />
     <Resource Include="Assets\Hero.png" />
     <Resource Include="Assets\Key.png" />
+    <Resource Include="Assets\Menu.jpg" />
     <Resource Include="Assets\Portal.png" />
     <Resource Include="Assets\Wall.png" />
   </ItemGroup>
