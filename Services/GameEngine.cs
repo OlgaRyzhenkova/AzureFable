@@ -125,14 +125,14 @@ namespace AzureFable.Services
         private void CheckItemInteraction()
         {
             Cell cell = _maze.GetCell(_maze.Hero.X, _maze.Hero.Y);
-            Item? item = cell.Item;
+            IInteractable? interactable = cell.Item;
 
-            if (item == null || !item.IsActive)
+            if (interactable == null || !interactable.IsActive)
             {
                 return;
             }
 
-            ItemInteractionResult result = item.Interact(_maze.Hero);
+            ItemInteractionResult result = interactable.Interact(_maze.Hero);
 
             switch (result)
             {
@@ -144,7 +144,7 @@ namespace AzureFable.Services
                     break;
             }
 
-            if (!item.IsActive)
+            if (!interactable.IsActive)
             {
                 cell.RemoveItem();
             }
