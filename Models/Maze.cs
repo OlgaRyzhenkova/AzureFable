@@ -18,7 +18,7 @@ namespace AzureFable.Models
         public int Rows { get; private set; }
         public int Columns { get; private set; }
 
-        public Maze(int rows, int columns)
+        public Maze(int rows, int columns, Hero hero)
         {
             if (rows <= 0)
             {
@@ -30,12 +30,14 @@ namespace AzureFable.Models
                 throw new ArgumentOutOfRangeException(nameof(columns));
             }
 
+            ArgumentNullException.ThrowIfNull(hero);
+
             Rows = rows;
             Columns = columns;
             _grid = new Cell[rows, columns];
             _enemies = new List<Enemy>();
             _items = new List<Item>();
-            Hero = new Hero();
+            Hero = hero;
         }
 
         public void SetCell(Cell cell)

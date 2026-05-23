@@ -32,7 +32,8 @@ namespace AzureFable.Services
         {
             int rows = Layout.Length;
             int columns = Layout[0].Length;
-            Maze maze = new Maze(rows, columns);
+            Hero hero = new Hero();
+            Maze maze = new Maze(rows, columns, hero);
 
             List<Floor> freeCells = new List<Floor>();
 
