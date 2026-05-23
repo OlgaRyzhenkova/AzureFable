@@ -11,8 +11,8 @@ namespace AzureFable.Services
         private readonly IEnemyLogic _enemyLogic;
         private readonly ICollisionService _collisionService;
         private readonly IItemSpawnService _itemSpawnService;
+        private readonly Action _onUpdate;
         private Maze _maze;
-        private Action _onUpdate;
 
         public GameStateEnum GameState { get; private set; }
 
