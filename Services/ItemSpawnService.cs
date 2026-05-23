@@ -6,10 +6,40 @@ namespace AzureFable.Services
     {
         private readonly Random _random = new Random();
 
+        public void SpawnHeart(Maze maze)
+        {
+            ArgumentNullException.ThrowIfNull(maze);
+
+            Floor? heartCell = GetRandomFreeCell(maze);
+
+            if (heartCell == null)
+            {
+                return;
+            }
+
+            Heart heart = new Heart();
+            heartCell.PlaceItem(heart);
+            maze.AddItem(heart);
+        }
+
         public void SpawnPortal(Maze maze)
         {
             ArgumentNullException.ThrowIfNull(maze);
 
+            Floor? portalCell = GetRandomFreeCell(maze);
+
+            if (portalCell == null)
+            {
+                return;
+            }
+
+            Portal portal = new Portal();
+            portalCell.PlaceItem(portal);
+            maze.AddItem(portal);
+        }
+
+        private Floor? GetRandomFreeCell(Maze maze)
+        {
             List<Floor> freeCells = new List<Floor>();
 
             for (int y = 0; y < maze.Rows; y++)
@@ -28,13 +58,10 @@ namespace AzureFable.Services
 
             if (freeCells.Count == 0)
             {
-                return;
+                return null;
             }
 
-            Floor portalCell = freeCells[_random.Next(freeCells.Count)];
-            Portal portal = new Portal();
-            portalCell.PlaceItem(portal);
-            maze.AddItem(portal);
+            return freeCells[_random.Next(freeCells.Count)];
         }
     }
 }

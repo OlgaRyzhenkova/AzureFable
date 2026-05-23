@@ -156,7 +156,7 @@ namespace AzureFable.Services
 
             if (collision && _maze.Hero.IsAlive)
             {
-                _collisionService.SpawnHeart(_maze);
+                _itemSpawnService.SpawnHeart(_maze);
             }
         }
 
