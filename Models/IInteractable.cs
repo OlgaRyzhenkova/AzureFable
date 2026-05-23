@@ -2,6 +2,6 @@ namespace AzureFable.Models
 {
     internal interface IInteractable
     {
-        Enums.ItemInteractionResult Interact(Hero hero);
+        ItemInteractionResult Interact(Hero hero);
     }
 }

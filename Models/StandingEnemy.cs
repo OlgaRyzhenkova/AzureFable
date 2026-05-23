@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,7 +12,7 @@ namespace AzureFable.Models
         {
             Name = "StandingEnemy";
             ImagePath = "/Assets/Enemy.png";
-            Behaviour = Enums.AIBehaviour.Standing;
+            Behaviour = AIBehaviour.Standing;
         }
 
         public override void Move(Maze maze, Random random)

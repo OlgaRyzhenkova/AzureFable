@@ -4,7 +4,7 @@ namespace AzureFable.Models
 {
     internal class GameSettings
     {
-        public Enums.GameDifficulty Difficulty { get; set; } = Enums.GameDifficulty.Normal;
+        public GameDifficulty Difficulty { get; set; } = GameDifficulty.Normal;
 
         public TimeSpan EnemyMoveInterval
         {
@@ -12,8 +12,8 @@ namespace AzureFable.Models
             {
                 return Difficulty switch
                 {
-                    Enums.GameDifficulty.Easy => TimeSpan.FromMilliseconds(700),
-                    Enums.GameDifficulty.Hard => TimeSpan.FromMilliseconds(300),
+                    GameDifficulty.Easy => TimeSpan.FromMilliseconds(700),
+                    GameDifficulty.Hard => TimeSpan.FromMilliseconds(300),
                     _ => TimeSpan.FromMilliseconds(500)
                 };
             }

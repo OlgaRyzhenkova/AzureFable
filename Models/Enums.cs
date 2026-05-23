@@ -1,45 +1,37 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
 namespace AzureFable.Models
 {
-    internal class Enums
+    internal enum CellType
     {
-        public enum CellType
-        {
-            Floor,
-            Wall
-        }
+        Floor,
+        Wall
+    }
 
-        public enum GameState
-        {
-            Playing,
-            Paused,
-            GameOver,
-            Win
-        }
-        public enum AIBehaviour
-        {
-            Standing,
-            Random
-        }
+    internal enum GameState
+    {
+        Playing,
+        Paused,
+        GameOver,
+        Win
+    }
 
-        public enum ItemInteractionResult
-        {
-            None,
-            KeyCollected,
-            Healed,
-            Win
-        }
+    internal enum AIBehaviour
+    {
+        Standing,
+        Random
+    }
 
-        public enum GameDifficulty
-        {
-            Easy,
-            Normal,
-            Hard
-        }
+    internal enum ItemInteractionResult
+    {
+        None,
+        KeyCollected,
+        Healed,
+        Win
+    }
+
+    internal enum GameDifficulty
+    {
+        Easy,
+        Normal,
+        Hard
     }
 }

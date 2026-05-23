@@ -1,6 +1,7 @@
-﻿using AzureFable.Models;
+using AzureFable.Models;
 using AzureFable.Services;
 using System.Collections.ObjectModel;
+using GameStateEnum = AzureFable.Models.GameState;
 
 namespace AzureFable.ViewModels
 {
@@ -15,8 +16,8 @@ namespace AzureFable.ViewModels
         private readonly Action _onHelp;
         private readonly GameSettings _settings;
 
-        private Enums.GameState _gameState;
-        public Enums.GameState GameState
+        private GameStateEnum _gameState;
+        public GameStateEnum GameState
         {
             get => _gameState;
             private set
@@ -85,14 +86,14 @@ namespace AzureFable.ViewModels
             _gameEngine.Start();
         }
 
-        private void OnGameStateChanged(Enums.GameState state)
+        private void OnGameStateChanged(GameStateEnum state)
         {
-            if (state == Enums.GameState.Win)
+            if (state == GameStateEnum.Win)
             {
                 _gameEngine.Stop();
                 _onWin();
             }
-            else if (state == Enums.GameState.GameOver)
+            else if (state == GameStateEnum.GameOver)
             {
                 _gameEngine.Stop();
                 _onGameOver();
@@ -101,7 +102,7 @@ namespace AzureFable.ViewModels
 
         public void MoveHero(System.Windows.Input.Key key)
         {
-            if (GameState != Enums.GameState.Playing)
+            if (GameState != GameStateEnum.Playing)
             {
                 return;
             }
@@ -126,7 +127,7 @@ namespace AzureFable.ViewModels
 
         public void Pause()
         {
-            if (GameState != Enums.GameState.Playing)
+            if (GameState != GameStateEnum.Playing)
             {
                 return;
             }
@@ -138,7 +139,7 @@ namespace AzureFable.ViewModels
 
         public void ShowHelp()
         {
-            if (GameState != Enums.GameState.Playing)
+            if (GameState != GameStateEnum.Playing)
             {
                 return;
             }
@@ -150,7 +151,7 @@ namespace AzureFable.ViewModels
 
         public void Resume()
         {
-            if (GameState != Enums.GameState.Paused)
+            if (GameState != GameStateEnum.Paused)
             {
                 return;
             }

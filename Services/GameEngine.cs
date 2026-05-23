@@ -1,10 +1,11 @@
-﻿using AzureFable.Models;
+using AzureFable.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Threading;
+using GameStateEnum = AzureFable.Models.GameState;
 
 namespace AzureFable.Services
 {
@@ -17,7 +18,7 @@ namespace AzureFable.Services
         private Maze _maze;
         private Action _onUpdate;
 
-        public Enums.GameState GameState { get; private set; }
+        public GameStateEnum GameState { get; private set; }
 
         public GameEngine(Maze maze, Action onUpdate, TimeSpan enemyMoveInterval)
         {
@@ -26,7 +27,7 @@ namespace AzureFable.Services
             _enemyLogic = new EnemyLogic();
             _collisionService = new CollisionService();
             _random = new Random();
-            GameState = Enums.GameState.Playing;
+            GameState = GameStateEnum.Playing;
 
             _timer = new DispatcherTimer();
             _timer.Interval = enemyMoveInterval;
@@ -45,29 +46,29 @@ namespace AzureFable.Services
 
         public void Pause()
         {
-            if (GameState != Enums.GameState.Playing)
+            if (GameState != GameStateEnum.Playing)
             {
                 return;
             }
 
-            GameState = Enums.GameState.Paused;
+            GameState = GameStateEnum.Paused;
             Stop();
         }
 
         public void Resume()
         {
-            if (GameState != Enums.GameState.Paused)
+            if (GameState != GameStateEnum.Paused)
             {
                 return;
             }
 
-            GameState = Enums.GameState.Playing;
+            GameState = GameStateEnum.Playing;
             Start();
         }
 
         private void OnTick(object? sender, EventArgs e)
         {
-            if (GameState != Enums.GameState.Playing)
+            if (GameState != GameStateEnum.Playing)
             {
                 return;
             }
@@ -81,7 +82,7 @@ namespace AzureFable.Services
 
         public void MoveHero(int dx, int dy)
         {
-            if (GameState != Enums.GameState.Playing)
+            if (GameState != GameStateEnum.Playing)
             {
                 return;
             }
@@ -98,7 +99,7 @@ namespace AzureFable.Services
 
             CheckItemInteraction();
 
-            if (GameState == Enums.GameState.Playing)
+            if (GameState == GameStateEnum.Playing)
             {
                 CheckEnemyInteraction();
                 UpdateGameState();
@@ -110,7 +111,7 @@ namespace AzureFable.Services
         public void UpdateMaze(Maze maze)
         {
             _maze = maze;
-            GameState = Enums.GameState.Playing;
+            GameState = GameStateEnum.Playing;
         }
 
         private void CheckItemInteraction()
@@ -123,15 +124,15 @@ namespace AzureFable.Services
                 return;
             }
 
-            Enums.ItemInteractionResult result = item.Interact(_maze.Hero);
+            ItemInteractionResult result = item.Interact(_maze.Hero);
 
             switch (result)
             {
-                case Enums.ItemInteractionResult.KeyCollected:
+                case ItemInteractionResult.KeyCollected:
                     SpawnPortal();
                     break;
-                case Enums.ItemInteractionResult.Win:
-                    SetGameState(Enums.GameState.Win);
+                case ItemInteractionResult.Win:
+                    SetGameState(GameStateEnum.Win);
                     break;
             }
 
@@ -184,11 +185,11 @@ namespace AzureFable.Services
         {
             if (_maze.Hero.Health <= 0)
             {
-                SetGameState(Enums.GameState.GameOver);
+                SetGameState(GameStateEnum.GameOver);
             }
         }
 
-        private void SetGameState(Enums.GameState state)
+        private void SetGameState(GameStateEnum state)
         {
             if (GameState == state)
             {
@@ -197,7 +198,7 @@ namespace AzureFable.Services
 
             GameState = state;
 
-            if (state == Enums.GameState.Win || state == Enums.GameState.GameOver)
+            if (state == GameStateEnum.Win || state == GameStateEnum.GameOver)
             {
                 Stop();
             }

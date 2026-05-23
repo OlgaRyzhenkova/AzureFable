@@ -13,7 +13,7 @@ namespace AzureFable.ViewModels
         public RelayCommand HardCommand { get; }
         public RelayCommand BackCommand { get; }
 
-        public Enums.GameDifficulty Difficulty
+        public GameDifficulty Difficulty
         {
             get => _settings.Difficulty;
             private set
@@ -35,8 +35,8 @@ namespace AzureFable.ViewModels
             {
                 return Difficulty switch
                 {
-                    Enums.GameDifficulty.Easy => "Легка",
-                    Enums.GameDifficulty.Hard => "Важка",
+                    GameDifficulty.Easy => "Легка",
+                    GameDifficulty.Hard => "Важка",
                     _ => "Звичайна"
                 };
             }
@@ -47,9 +47,9 @@ namespace AzureFable.ViewModels
             _settings = settings;
             _onBack = onBack;
 
-            EasyCommand = new RelayCommand(() => Difficulty = Enums.GameDifficulty.Easy);
-            NormalCommand = new RelayCommand(() => Difficulty = Enums.GameDifficulty.Normal);
-            HardCommand = new RelayCommand(() => Difficulty = Enums.GameDifficulty.Hard);
+            EasyCommand = new RelayCommand(() => Difficulty = GameDifficulty.Easy);
+            NormalCommand = new RelayCommand(() => Difficulty = GameDifficulty.Normal);
+            HardCommand = new RelayCommand(() => Difficulty = GameDifficulty.Hard);
             BackCommand = new RelayCommand(_onBack);
         }
     }

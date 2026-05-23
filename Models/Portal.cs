@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -14,15 +14,15 @@ namespace AzureFable.Models
             ImagePath = "/Assets/Portal.png";
         }
 
-        public override Enums.ItemInteractionResult Interact(Hero hero)
+        public override ItemInteractionResult Interact(Hero hero)
         {
             if (hero.HasKey)
             {
                 Deactivate();
-                return Enums.ItemInteractionResult.Win;
+                return ItemInteractionResult.Win;
             }
 
-            return Enums.ItemInteractionResult.None;
+            return ItemInteractionResult.None;
         }
     }
 }

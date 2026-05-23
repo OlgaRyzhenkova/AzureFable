@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,7 +8,7 @@ namespace AzureFable.Models
 {
     internal abstract class Enemy : Unit
     {
-        public Enums.AIBehaviour Behaviour { get; protected set; }
+        public AIBehaviour Behaviour { get; protected set; }
 
         protected Enemy() : base(1)
         {
