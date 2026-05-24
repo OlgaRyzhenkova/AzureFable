@@ -27,7 +27,6 @@ namespace AzureFable.ViewModels
         private readonly MenuViewModel _menuViewModel;
         private GameViewModel? _gameViewModel;
         private readonly GameSettings _settings;
-        private readonly IMazeGenerator _mazeGenerator;
         private readonly IGameEngineFactory _gameEngineFactory;
 
         public MainViewModel(
@@ -43,7 +42,6 @@ namespace AzureFable.ViewModels
             _showExitConfirmation = showExitConfirmation;
             _showError = showError;
             _settings = new GameSettings();
-            _mazeGenerator = new MazeGenerator();
             _gameEngineFactory = new GameEngineFactory(
                 new EnemyLogic(),
                 new CollisionService(),
@@ -62,7 +60,7 @@ namespace AzureFable.ViewModels
                     _showPause,
                     _showGameHelp,
                     _settings,
-                    _mazeGenerator,
+                    CreateMazeGenerator(),
                     _gameEngineFactory
                 );
                 CurrentView = _gameViewModel;
@@ -101,6 +99,13 @@ namespace AzureFable.ViewModels
         public void ConfirmExit()
         {
             _showExitConfirmation();
+        }
+
+        private IMazeGenerator CreateMazeGenerator()
+        {
+            return new MazeGenerator(
+                DefaultMazeLayout.Create(),
+                DefaultEnemySpawnRules.Create(_settings.Difficulty));
         }
     }
 }
