@@ -9,8 +9,8 @@ namespace AzureFable.ViewModels
     internal class GameViewModel : ViewModelBase
     {
         private Maze _maze;
-        private readonly MazeGenerator _mazeGenerator;
-        private readonly GameEngine _gameEngine;
+        private readonly IMazeGenerator _mazeGenerator;
+        private readonly IGameEngine _gameEngine;
         private readonly Action _onWin;
         private readonly Action _onGameOver;
         private readonly Action _onPause;
@@ -68,16 +68,19 @@ namespace AzureFable.ViewModels
             Action onPause,
             Action onHelp,
             GameSettings settings,
-            IEnemyLogic enemyLogic,
-            ICollisionService collisionService,
-            IItemSpawnService itemSpawnService)
+            IMazeGenerator mazeGenerator,
+            IGameEngineFactory gameEngineFactory)
         {
+            ArgumentNullException.ThrowIfNull(settings);
+            ArgumentNullException.ThrowIfNull(mazeGenerator);
+            ArgumentNullException.ThrowIfNull(gameEngineFactory);
+
             _onWin = onWin;
             _onGameOver = onGameOver;
             _onPause = onPause;
             _onHelp = onHelp;
             _settings = settings;
-            _mazeGenerator = new MazeGenerator(DefaultEnemySpawnRules.Create());
+            _mazeGenerator = mazeGenerator;
             GameObjects = new ObservableCollection<GameObject>();
             Cells = new ObservableCollection<Cell>();
             Hearts = new ObservableCollection<bool>();
@@ -85,13 +88,10 @@ namespace AzureFable.ViewModels
             HelpCommand = new RelayCommand(ShowHelp);
 
             _maze = _mazeGenerator.Generate();
-            _gameEngine = new GameEngine(
+            _gameEngine = gameEngineFactory.Create(
                 _maze,
                 RefreshGame,
-                _settings.EnemyMoveInterval,
-                enemyLogic,
-                collisionService,
-                itemSpawnService);
+                _settings.EnemyMoveInterval);
 
             HeroHealth = _maze.Hero.Health;
             HasKey = _maze.Hero.HasKey;

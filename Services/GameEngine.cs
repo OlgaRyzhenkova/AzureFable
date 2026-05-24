@@ -5,7 +5,7 @@ using GameStateEnum = AzureFable.Models.GameState;
 
 namespace AzureFable.Services
 {
-    internal class GameEngine
+    internal class GameEngine : IGameEngine
     {
         private readonly DispatcherTimer _timer;
         private readonly IEnemyLogic _enemyLogic;

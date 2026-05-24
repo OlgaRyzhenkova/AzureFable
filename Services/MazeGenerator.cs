@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace AzureFable.Services
 {
-    internal class MazeGenerator
+    internal class MazeGenerator : IMazeGenerator
     {
         private static readonly string[] Layout = new string[]
         {
@@ -25,6 +25,10 @@ namespace AzureFable.Services
 
         private readonly Random _random = new Random();
         private readonly IReadOnlyList<EnemySpawnRule> _enemySpawnRules;
+
+        public MazeGenerator() : this(DefaultEnemySpawnRules.Create())
+        {
+        }
 
         public MazeGenerator(IReadOnlyList<EnemySpawnRule> enemySpawnRules)
         {
