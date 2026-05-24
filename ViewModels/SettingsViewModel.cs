@@ -23,7 +23,7 @@ namespace AzureFable.ViewModels
                     return;
                 }
 
-                _settings.Difficulty = value;
+                _settings.ChangeDifficulty(value);
                 OnPropertyChanged();
                 OnPropertyChanged(nameof(DifficultyText));
             }
