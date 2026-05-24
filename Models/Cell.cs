@@ -2,27 +2,13 @@ using System;
 
 namespace AzureFable.Models
 {
-    internal abstract class Cell
+    internal abstract class Cell : GameObject
     {
-        public int X { get; }
-        public int Y { get; }
         public Item? Item { get; private set; }
-        public string ImagePath { get; protected set; } = string.Empty;
 
         protected Cell(int x, int y)
         {
-            if (x < 0)
-            {
-                throw new ArgumentOutOfRangeException(nameof(x));
-            }
-
-            if (y < 0)
-            {
-                throw new ArgumentOutOfRangeException(nameof(y));
-            }
-
-            X = x;
-            Y = y;
+            SetPosition(x, y);
             Item = null;
         }
 

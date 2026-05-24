@@ -4,6 +4,7 @@ namespace AzureFable.Models
     {
         public Wall(int x, int y) : base(x, y)
         {
+            Name = "Wall";
             ImagePath = "/Assets/Wall.png";
         }
 

@@ -24,6 +24,14 @@ namespace AzureFable.Services
         };
 
         private readonly Random _random = new Random();
+        private readonly IReadOnlyList<EnemySpawnRule> _enemySpawnRules;
+
+        public MazeGenerator(IReadOnlyList<EnemySpawnRule> enemySpawnRules)
+        {
+            ArgumentNullException.ThrowIfNull(enemySpawnRules);
+
+            _enemySpawnRules = enemySpawnRules;
+        }
 
         public Maze Generate()
         {
@@ -57,8 +65,7 @@ namespace AzureFable.Services
 
             PlaceHero(maze, freeCells);
             PlaceKey(maze, freeCells);
-            PlaceEnemies(maze, freeCells, 3);
-            PlaceGhosts(maze, freeCells, 2);
+            PlaceEnemies(maze, freeCells);
             PlaceHearts(maze, freeCells, 2);
 
             return maze;
@@ -115,25 +122,17 @@ namespace AzureFable.Services
             maze.AddItem(key);
         }
 
-        private void PlaceEnemies(Maze maze, List<Floor> freeCells, int count)
+        private void PlaceEnemies(Maze maze, List<Floor> freeCells)
         {
-            for (int i = 0; i < count; i++)
+            foreach (EnemySpawnRule rule in _enemySpawnRules)
             {
-                Floor cell = GetRandomFreeCell(freeCells);
-                StandingEnemy enemy = new StandingEnemy();
-                enemy.SetPosition(cell.X, cell.Y);
-                maze.AddEnemy(enemy);
-            }
-        }
-
-        private void PlaceGhosts(Maze maze, List<Floor> freeCells, int count)
-        {
-            for (int i = 0; i < count; i++)
-            {
-                Floor cell = GetRandomFreeCell(freeCells);
-                Ghost ghost = new Ghost();
-                ghost.SetPosition(cell.X, cell.Y);
-                maze.AddEnemy(ghost);
+                for (int i = 0; i < rule.Count; i++)
+                {
+                    Floor cell = GetRandomFreeCell(freeCells);
+                    Enemy enemy = rule.CreateEnemy();
+                    enemy.SetPosition(cell.X, cell.Y);
+                    maze.AddEnemy(enemy);
+                }
             }
         }
 

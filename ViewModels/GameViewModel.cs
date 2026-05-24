@@ -77,7 +77,7 @@ namespace AzureFable.ViewModels
             _onPause = onPause;
             _onHelp = onHelp;
             _settings = settings;
-            _mazeGenerator = new MazeGenerator();
+            _mazeGenerator = new MazeGenerator(DefaultEnemySpawnRules.Create());
             GameObjects = new ObservableCollection<GameObject>();
             Cells = new ObservableCollection<Cell>();
             Hearts = new ObservableCollection<bool>();
