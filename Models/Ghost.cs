@@ -11,7 +11,7 @@ namespace AzureFable.Models
             Behaviour = AIBehaviour.Random;
         }
 
-        public override void Move(Maze maze, Random random)
+        public override void Move(IMaze maze, Random random)
         {
             foreach (var direction in GetShuffledDirections(random))
             {
@@ -22,14 +22,14 @@ namespace AzureFable.Models
             }
         }
 
-        public override bool Interact(Hero hero, Maze maze, Random random)
+        public override bool Interact(Hero hero, IMaze maze, Random random)
         {
             hero.TakeDamage(1);
             Flee(maze, random);
             return true;
         }
 
-        private void Flee(Maze maze, Random random)
+        private void Flee(IMaze maze, Random random)
         {
             foreach (var direction in GetShuffledDirections(random))
             {

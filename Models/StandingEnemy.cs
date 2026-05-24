@@ -11,11 +11,11 @@ namespace AzureFable.Models
             Behaviour = AIBehaviour.Standing;
         }
 
-        public override void Move(Maze maze, Random random)
+        public override void Move(IMaze maze, Random random)
         {
         }
 
-        public override bool Interact(Hero hero, Maze maze, Random random)
+        public override bool Interact(Hero hero, IMaze maze, Random random)
         {
             hero.TakeDamage(1);
             Deactivate();

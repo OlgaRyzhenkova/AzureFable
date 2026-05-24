@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace AzureFable.Models
 {
-    internal class Maze
+    internal class Maze : IMaze
     {
         private readonly Cell[,] _grid;
         private readonly List<Enemy> _enemies;

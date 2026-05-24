@@ -4,6 +4,6 @@ namespace AzureFable.Services
 {
     internal interface IMazeGenerator
     {
-        Maze Generate();
+        IMaze Generate();
     }
 }

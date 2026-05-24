@@ -4,6 +4,6 @@ namespace AzureFable.Services
 {
     internal interface IEnemyLogic
     {
-        void MoveEnemies(IReadOnlyList<Enemy> enemies, Maze maze);
+        void MoveEnemies(IReadOnlyList<Enemy> enemies, IMaze maze);
     }
 }

@@ -8,7 +8,7 @@ namespace AzureFable.ViewModels
 {
     internal class GameViewModel : ViewModelBase
     {
-        private Maze _maze;
+        private IMaze _maze;
         private readonly IMazeGenerator _mazeGenerator;
         private readonly IGameEngine _gameEngine;
         private readonly Action _onWin;
@@ -248,6 +248,7 @@ namespace AzureFable.ViewModels
 
         private void SyncGameObjects(List<GameObject> currentObjects)
         {
+            // Preserve existing objects in the collection so WPF updates positions without rebuilding the whole visual layer.
             for (int i = GameObjects.Count - 1; i >= 0; i--)
             {
                 if (!currentObjects.Contains(GameObjects[i]))

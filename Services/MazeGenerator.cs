@@ -28,7 +28,7 @@ namespace AzureFable.Services
             _enemySpawnRules = enemySpawnRules;
         }
 
-        public Maze Generate()
+        public IMaze Generate()
         {
             int rows = _layout.Rows.Count;
             ValidateLayoutRows(rows);

@@ -5,6 +5,6 @@ namespace AzureFable.Services
 {
     internal interface IGameEngineFactory
     {
-        IGameEngine Create(Maze maze, Action onUpdate, TimeSpan enemyMoveInterval);
+        IGameEngine Create(IMaze maze, Action onUpdate, TimeSpan enemyMoveInterval);
     }
 }

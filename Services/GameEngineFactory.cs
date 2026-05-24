@@ -23,7 +23,7 @@ namespace AzureFable.Services
             _itemSpawnService = itemSpawnService;
         }
 
-        public IGameEngine Create(Maze maze, Action onUpdate, TimeSpan enemyMoveInterval)
+        public IGameEngine Create(IMaze maze, Action onUpdate, TimeSpan enemyMoveInterval)
         {
             return new GameEngine(
                 maze,

@@ -8,7 +8,7 @@ namespace AzureFable.Services
     {
         private readonly Random _random = new Random();
 
-        public void MoveEnemies(IReadOnlyList<Enemy> enemies, Maze maze)
+        public void MoveEnemies(IReadOnlyList<Enemy> enemies, IMaze maze)
         {
             foreach (Enemy enemy in enemies)
             {

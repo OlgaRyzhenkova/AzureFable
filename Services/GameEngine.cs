@@ -12,12 +12,12 @@ namespace AzureFable.Services
         private readonly ICollisionService _collisionService;
         private readonly IItemSpawnService _itemSpawnService;
         private readonly Action _onUpdate;
-        private Maze _maze;
+        private IMaze _maze;
 
         public GameStateEnum GameState { get; private set; }
 
         public GameEngine(
-            Maze maze,
+            IMaze maze,
             Action onUpdate,
             TimeSpan enemyMoveInterval,
             IEnemyLogic enemyLogic,
@@ -116,7 +116,7 @@ namespace AzureFable.Services
             _onUpdate();
         }
 
-        public void UpdateMaze(Maze maze)
+        public void UpdateMaze(IMaze maze)
         {
             _maze = maze;
             GameState = GameStateEnum.Playing;

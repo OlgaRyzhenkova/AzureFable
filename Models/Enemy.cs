@@ -11,11 +11,11 @@ namespace AzureFable.Models
         {
         }
 
-        public abstract void Move(Maze maze, Random random);
+        public abstract void Move(IMaze maze, Random random);
 
-        public abstract bool Interact(Hero hero, Maze maze, Random random);
+        public abstract bool Interact(Hero hero, IMaze maze, Random random);
 
-        protected bool TryMove(Maze maze, int dx, int dy)
+        protected bool TryMove(IMaze maze, int dx, int dy)
         {
             int newX = X + dx;
             int newY = Y + dy;

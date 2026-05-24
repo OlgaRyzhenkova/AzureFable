@@ -6,7 +6,7 @@ namespace AzureFable.Services
     {
         private readonly Random _random = new Random();
 
-        public void SpawnHeart(Maze maze)
+        public void SpawnHeart(IMaze maze)
         {
             ArgumentNullException.ThrowIfNull(maze);
 
@@ -22,7 +22,7 @@ namespace AzureFable.Services
             maze.AddItem(heart);
         }
 
-        public void SpawnPortal(Maze maze)
+        public void SpawnPortal(IMaze maze)
         {
             ArgumentNullException.ThrowIfNull(maze);
 
@@ -38,7 +38,7 @@ namespace AzureFable.Services
             maze.AddItem(portal);
         }
 
-        private Floor? GetRandomFreeCell(Maze maze)
+        private Floor? GetRandomFreeCell(IMaze maze)
         {
             List<Floor> freeCells = new List<Floor>();
 

@@ -6,7 +6,7 @@ namespace AzureFable.Services
     {
         private readonly Random _random = new Random();
 
-        public bool CheckHeroVsEnemies(Hero hero, IReadOnlyList<Enemy> enemies, Maze maze)
+        public bool CheckHeroVsEnemies(Hero hero, IReadOnlyList<Enemy> enemies, IMaze maze)
         {
             bool hasCollision = false;
 
