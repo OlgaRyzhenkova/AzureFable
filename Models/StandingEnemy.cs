@@ -15,7 +15,7 @@ namespace AzureFable.Models
         {
         }
 
-        public override bool Interact(Hero hero, Maze maze)
+        public override bool Interact(Hero hero, Maze maze, Random random)
         {
             hero.TakeDamage(1);
             Deactivate();

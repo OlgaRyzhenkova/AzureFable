@@ -13,7 +13,7 @@ namespace AzureFable.Models
 
         public abstract void Move(Maze maze, Random random);
 
-        public abstract bool Interact(Hero hero, Maze maze);
+        public abstract bool Interact(Hero hero, Maze maze, Random random);
 
         protected bool TryMove(Maze maze, int dx, int dy)
         {

@@ -22,16 +22,16 @@ namespace AzureFable.Models
             }
         }
 
-        public override bool Interact(Hero hero, Maze maze)
+        public override bool Interact(Hero hero, Maze maze, Random random)
         {
             hero.TakeDamage(1);
-            Flee(maze);
+            Flee(maze, random);
             return true;
         }
 
-        private void Flee(Maze maze)
+        private void Flee(Maze maze, Random random)
         {
-            foreach (var direction in GetShuffledDirections(Random.Shared))
+            foreach (var direction in GetShuffledDirections(random))
             {
                 if (TryMove(maze, direction.dx, direction.dy))
                 {
