@@ -58,7 +58,7 @@ namespace AzureFable.ViewModels
 
         public ObservableCollection<Cell> Cells { get; }
         public ObservableCollection<GameObject> GameObjects { get; }
-        public ObservableCollection<bool> Hearts { get; }
+        public ObservableCollection<string> Hearts { get; }
         public RelayCommand PauseCommand { get; }
         public RelayCommand HelpCommand { get; }
 
@@ -83,7 +83,7 @@ namespace AzureFable.ViewModels
             _mazeGenerator = mazeGenerator;
             GameObjects = new ObservableCollection<GameObject>();
             Cells = new ObservableCollection<Cell>();
-            Hearts = new ObservableCollection<bool>();
+            Hearts = new ObservableCollection<string>();
             PauseCommand = new RelayCommand(Pause);
             HelpCommand = new RelayCommand(ShowHelp);
 
@@ -188,7 +188,7 @@ namespace AzureFable.ViewModels
             HasKey = _maze.Hero.HasKey;
             GameState = _gameEngine.GameState;
 
-            SyncHearts(_maze.Hero.Health);
+            SyncHearts(_maze.Hero.Health, _maze.Hero.MaxHealth);
         }
 
         private void InitializeCells()
@@ -233,16 +233,26 @@ namespace AzureFable.ViewModels
             SyncGameObjects(currentObjects);
         }
 
-        private void SyncHearts(int health)
+        private void SyncHearts(int health, int maxHealth)
         {
-            while (Hearts.Count > health)
+            while (Hearts.Count > maxHealth)
             {
                 Hearts.RemoveAt(Hearts.Count - 1);
             }
 
-            while (Hearts.Count < health)
+            while (Hearts.Count < maxHealth)
             {
-                Hearts.Add(true);
+                Hearts.Add(string.Empty);
+            }
+
+            for (int i = 0; i < Hearts.Count; i++)
+            {
+                string imagePath = i < health ? "/Assets/Heart.png" : "/Assets/BrokenHeart.png";
+
+                if (Hearts[i] != imagePath)
+                {
+                    Hearts[i] = imagePath;
+                }
             }
         }
 

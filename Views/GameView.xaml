@@ -79,7 +79,7 @@
                         </ItemsControl.ItemsPanel>
                         <ItemsControl.ItemTemplate>
                             <DataTemplate>
-                                <Image Source="/Assets/Heart.png"
+                                <Image Source="{Binding}"
                                        Width="28"
                                        Height="28"
                                        Margin="3,0"/>
