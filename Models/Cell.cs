@@ -14,11 +14,6 @@ namespace AzureFable.Models
 
         public abstract bool CanEnter(Unit? unit);
 
-        public bool IsPassable()
-        {
-            return CanEnter(null);
-        }
-
         public void PlaceItem(Item item)
         {
             ArgumentNullException.ThrowIfNull(item);

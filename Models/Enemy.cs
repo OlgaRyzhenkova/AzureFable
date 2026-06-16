@@ -5,8 +5,6 @@ namespace AzureFable.Models
 {
     internal abstract class Enemy : Unit
     {
-        public AIBehaviour Behaviour { get; protected set; }
-
         protected Enemy() : base(1)
         {
         }

@@ -208,16 +208,11 @@ namespace AzureFable.ViewModels
         {
             List<GameObject> currentObjects = new List<GameObject>();
 
-            for (int y = 0; y < _maze.Rows; y++)
+            foreach (Item item in _maze.Items)
             {
-                for (int x = 0; x < _maze.Columns; x++)
+                if (item.IsActive)
                 {
-                    Cell cell = _maze.GetCell(x, y);
-
-                    if (cell.Item != null && cell.Item.IsActive)
-                    {
-                        currentObjects.Add(cell.Item);
-                    }
+                    currentObjects.Add(item);
                 }
             }
 

@@ -116,12 +116,6 @@ namespace AzureFable.Services
             _onUpdate();
         }
 
-        public void UpdateMaze(IMaze maze)
-        {
-            _maze = maze;
-            GameState = GameStateEnum.Playing;
-        }
-
         private void CheckItemInteraction()
         {
             Cell cell = _maze.GetCell(_maze.Hero.X, _maze.Hero.Y);

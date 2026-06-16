@@ -8,7 +8,6 @@ namespace AzureFable.Models
         {
             Name = "StandingEnemy";
             ImagePath = "/Assets/Enemy.png";
-            Behaviour = AIBehaviour.Standing;
         }
 
         public override void Move(IMaze maze, Random random)

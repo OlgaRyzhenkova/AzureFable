@@ -6,12 +6,17 @@
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <UseWPF>true</UseWPF>
+    <ApplicationIcon>Assets\GameIcon.ico</ApplicationIcon>
+    <DefaultItemExcludes>$(DefaultItemExcludes);outputs\**;.temp\**;.dotnet-home\**;.localappdata\**;**\node_modules\**</DefaultItemExcludes>
   </PropertyGroup>
 
   <ItemGroup>
     <None Remove="Assets\BrokenHeart.png" />
     <None Remove="Assets\Enemy.png" />
     <None Remove="Assets\Floor.png" />
+    <None Remove="Assets\GameIcon.ico" />
+    <None Remove="Assets\GameIcon.png" />
+    <None Remove="Assets\GameLogo.png" />
     <None Remove="Assets\Ghost.png" />
     <None Remove="Assets\Heart.png" />
     <None Remove="Assets\Hero.png" />
@@ -25,6 +30,9 @@
     <Resource Include="Assets\BrokenHeart.png" />
     <Resource Include="Assets\Enemy.png" />
     <Resource Include="Assets\Floor.png" />
+    <Resource Include="Assets\GameIcon.ico" />
+    <Resource Include="Assets\GameIcon.png" />
+    <Resource Include="Assets\GameLogo.png" />
     <Resource Include="Assets\Ghost.png" />
     <Resource Include="Assets\Heart.png" />
     <Resource Include="Assets\Hero.png" />

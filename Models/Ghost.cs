@@ -8,7 +8,6 @@ namespace AzureFable.Models
         {
             Name = "Ghost";
             ImagePath = "/Assets/Ghost.png";
-            Behaviour = AIBehaviour.Random;
         }
 
         public override void Move(IMaze maze, Random random)

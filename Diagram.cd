@@ -1,0 +1,335 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="AzureFable.Models.Cell">
+    <Position X="6.75" Y="4.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAACAAAAAAAAAAAAAAAAEAEAAAAAEAAAAAAAAAAA=</HashCode>
+      <FileName>Models\Cell.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AzureFable.Models.Enemy">
+    <Position X="12.5" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAIAAAAAAAAAAgAAAIAAAAAAAAAAAAAAAAgA=</HashCode>
+      <FileName>Models\Enemy.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AzureFable.Models.Floor">
+    <Position X="5.5" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\Floor.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AzureFable.Models.GameObject">
+    <Position X="11.25" Y="0.5" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Events" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAABAAAAAMAAAAIQAgAAAAgAAAAAAAAAAYAA=</HashCode>
+      <FileName>Models\GameObject.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="AzureFable.Models.GameSettings">
+    <Position X="24.75" Y="10" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAQAAECAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\GameSettings.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AzureFable.Models.Ghost">
+    <Position X="11" Y="10.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAIAAAAAAAAAAAAAgIAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\Ghost.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AzureFable.Models.Heart">
+    <Position X="18.25" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\Heart.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AzureFable.Models.Hero">
+    <Position X="10" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAACAAIIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\Hero.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AzureFable.Models.Item">
+    <Position X="16.25" Y="4.25" Width="1.5" />
+    <InheritanceLine Type="AzureFable.Models.GameObject" FixedToPoint="true">
+      <Path>
+        <Point X="12" Y="3.661" />
+        <Point X="12" Y="3.95" />
+        <Point X="16.938" Y="3.95" />
+        <Point X="16.938" Y="4.25" />
+      </Path>
+    </InheritanceLine>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\Item.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="AzureFable.Models.Key">
+    <Position X="16.25" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\Key.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AzureFable.Models.Maze" BaseTypeListCollapsed="true">
+    <Position X="26.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QAAEAEAAAQAACEBAAIAAAAAAgFEAAAAAAAAAAAgAAAA=</HashCode>
+      <FileName>Models\Maze.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Orientation="Right" Position="0.362" />
+  </Class>
+  <Class Name="AzureFable.Models.Portal">
+    <Position X="14.25" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\Portal.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AzureFable.Models.StandingEnemy">
+    <Position X="14" Y="10.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAIAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\StandingEnemy.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AzureFable.Models.Unit">
+    <Position X="11.25" Y="4.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AQAACAAAAAAACACAAAAAAAAAAAAAAAAAAAAAgAAAAAA=</HashCode>
+      <FileName>Models\Unit.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AzureFable.Models.Wall">
+    <Position X="8" Y="7.75" Width="1.5" />
+    <InheritanceLine Type="AzureFable.Models.Cell" FixedFromPoint="true">
+      <Path>
+        <Point X="7.5" Y="6.511" />
+        <Point X="7.5" Y="7.375" />
+        <Point X="8.75" Y="7.375" />
+        <Point X="8.75" Y="7.75" />
+      </Path>
+    </InheritanceLine>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\Wall.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AzureFable.Services.CollisionService" BaseTypeListCollapsed="true">
+    <Position X="34.25" Y="13.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAE=</HashCode>
+      <FileName>Services\CollisionService.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="AzureFable.Services.DefaultMazeLayout">
+    <Position X="28.75" Y="10" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAA=</HashCode>
+      <FileName>Services\DefaultMazeLayout.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AzureFable.Services.EnemyLogic" BaseTypeListCollapsed="true">
+    <Position X="32" Y="13.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAE=</HashCode>
+      <FileName>Services\EnemyLogic.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="AzureFable.Services.EnemySpawnRule">
+    <Position X="31" Y="10" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAQAAAAAAAgAAAAAAAAAAAA=</HashCode>
+      <FileName>Services\EnemySpawnRule.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AzureFable.Services.GameEngine" BaseTypeListCollapsed="true">
+    <Position X="25.5" Y="13.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAgAAAAACAgBAAAAACAgAgQAAAACAEAIAAAAAsoIAA=</HashCode>
+      <FileName>Services\GameEngine.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="AzureFable.Services.GameEngineFactory" BaseTypeListCollapsed="true">
+    <Position X="27.5" Y="13.75" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAACAAAAAAAAAAEEAAAAAAAIAAAA=</HashCode>
+      <FileName>Services\GameEngineFactory.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="AzureFable.Services.ItemSpawnService" BaseTypeListCollapsed="true">
+    <Position X="36.5" Y="13.75" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAQAAAAAAAAEAAAAEAAAAAAAAAAAAAAAE=</HashCode>
+      <FileName>Services\ItemSpawnService.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="AzureFable.Services.MazeGenerationException">
+    <Position X="33" Y="10" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Services\MazeGenerationException.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AzureFable.Services.MazeGenerator" BaseTypeListCollapsed="true">
+    <Position X="35.25" Y="16.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>HAAAAAAACAAAAAABAACAAEAAAQAAACAAAAAAAEAAAAE=</HashCode>
+      <FileName>Services\MazeGenerator.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="AzureFable.Services.MazeLayout">
+    <Position X="26.75" Y="10" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Services\MazeLayout.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AzureFable.ViewModels.GameViewModel">
+    <Position X="9.25" Y="15.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQgAgAEIRACAAEAgAIBgBAhAEAgiAAAAAAAAAlIJCA=</HashCode>
+      <FileName>ViewModels\GameViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AzureFable.ViewModels.HelpViewModel">
+    <Position X="13.75" Y="15.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ViewModels\HelpViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AzureFable.ViewModels.MainViewModel">
+    <Position X="16" Y="15.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IAQAAAACIACIAAAQgAEQEAA4ABAAAAAAAAQAQAABAAA=</HashCode>
+      <FileName>ViewModels\MainViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AzureFable.ViewModels.MenuViewModel">
+    <Position X="11.5" Y="15.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AEQAAAAAAQAAABAhAABAAAAgABAAAAAAIAAYAAAAAAA=</HashCode>
+      <FileName>ViewModels\MenuViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AzureFable.ViewModels.RelayCommand">
+    <Position X="35.5" Y="10" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAEACAAQAAECAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ViewModels\RelayCommand.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="AzureFable.ViewModels.SettingsViewModel">
+    <Position X="18.25" Y="15.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAEAAAAACQAAgAAACAAAAAAAAEAAAAABAAEAAAA=</HashCode>
+      <FileName>ViewModels\SettingsViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AzureFable.ViewModels.ViewModelBase">
+    <Position X="13.75" Y="13" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAIAAAAAAAgAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ViewModels\ViewModelBase.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Interface Name="AzureFable.Models.IInteractable">
+    <Position X="23" Y="19" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAEAAAAAAAIAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\IInteractable.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="AzureFable.Models.IMaze">
+    <Position X="24.75" Y="19" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QAAAAAAAAAAACEBAAAAAAAAAgEEAAAAAAAAAAAgAAAA=</HashCode>
+      <FileName>Models\IMaze.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="AzureFable.Services.ICollisionService">
+    <Position X="28.25" Y="19" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Services\ICollisionService.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="AzureFable.Services.IEnemyLogic">
+    <Position X="30" Y="19" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAA=</HashCode>
+      <FileName>Services\IEnemyLogic.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="AzureFable.Services.IGameEngine">
+    <Position X="29.5" Y="13.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAgAAAAACAAAAAAAAAAAAAAAAAAAAAAIAAAAAkAIAA=</HashCode>
+      <FileName>Services\IGameEngine.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="AzureFable.Services.IGameEngineFactory">
+    <Position X="38.5" Y="17" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAA=</HashCode>
+      <FileName>Services\IGameEngineFactory.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="AzureFable.Services.IItemSpawnService">
+    <Position X="31.75" Y="19" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAQAAAAAAAAAAAAAEAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Services\IItemSpawnService.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="AzureFable.Services.IMazeGenerator">
+    <Position X="38.75" Y="18.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAA=</HashCode>
+      <FileName>Services\IMazeGenerator.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Enum Name="AzureFable.Models.GameState">
+    <Position X="25" Y="6" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAggAAAAAAAAAAAAEAAAAAIAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\Enums.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="AzureFable.Models.ItemInteractionResult">
+    <Position X="27.5" Y="6" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAEAAAAAAAAABAAAAAAAAAAEAAAQ=</HashCode>
+      <FileName>Models\Enums.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="AzureFable.Models.GameDifficulty">
+    <Position X="30" Y="6" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACAAAAAAAAAAAAAAAAAIAAAAAAAAAAAgAAA=</HashCode>
+      <FileName>Models\Enums.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

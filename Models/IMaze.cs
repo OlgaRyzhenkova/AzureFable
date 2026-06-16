@@ -14,8 +14,6 @@ namespace AzureFable.Models
 
         void AddItem(Item item);
 
-        bool IsPassable(int x, int y);
-
         bool CanEnter(int x, int y, Unit? unit);
     }
 }
